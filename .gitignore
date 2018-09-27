@@ -1,4 +1,4 @@
 /tools
 .DS_Store
 *.out
-*.hack
+04/*.hack
