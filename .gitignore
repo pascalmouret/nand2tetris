@@ -2,3 +2,6 @@
 .DS_Store
 *.out
 04/*.hack
+__pycache__
+06/**/*.hack
+/.mypy_chache
