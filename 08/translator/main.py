@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from translator.parser import load
 from translator.writer import Writer
+from translator.parser import load
 
 
 def translate(path: Path):
