@@ -22,9 +22,9 @@ def compile(path: Path) -> None:
         except CompilerError as e:
             print('Error in {}:'.format(file))
             print('    {}'.format(e))
-            print('Compilation failed.')
+            print('\033[91mCompilation failed.')
             return
-    print('Compilation done.')
+    print('\033[92mCompilation done.')
 
 def compile_file(path: Path):
     out_path = path.parent / path.parts[-1].replace('.jack', '_my.xml')
