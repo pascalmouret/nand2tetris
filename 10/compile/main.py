@@ -1,10 +1,10 @@
 from pathlib import Path
 
 from compile.tokenizer import Tokenizer
-from compile.compiler import Compiler
+from compile.compiler import Compiler, CompilerError
 
 
-def compile(path: Path):
+def compile(path: Path) -> None:
     files = []
     if path.is_dir():
         files = path.glob('*.jack')
@@ -17,8 +17,14 @@ def compile(path: Path):
             raise ValueError('Not a .jack file.')
         
     for file in files:
-        compile_file(file)
-
+        try:
+            compile_file(file)
+        except CompilerError as e:
+            print('Error in {}:'.format(file))
+            print('    {}'.format(e))
+            print('Compilation failed.')
+            return
+    print('Compilation done.')
 
 def compile_file(path: Path):
     out_path = path.parent / path.parts[-1].replace('.jack', '_my.xml')

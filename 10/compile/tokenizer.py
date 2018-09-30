@@ -16,6 +16,7 @@ class Tokenizer:
 
     def __iter__(self) -> Iterator[Token]:
         self.file_handle = open(self.file)
+        self.line_count = 0
         self.char_iter = itertools.chain.from_iterable(self.file_handle)
         self.current = None
         self.next = self.char_iter.__next__()
@@ -24,6 +25,8 @@ class Tokenizer:
     def load_next(self) -> None:
         self.current = self.next;
         try:
+            if self.current == '\n':
+                self.line_count += 1
             self.next = self.char_iter.__next__()
         except StopIteration:
             self.file_handle.close()
@@ -40,7 +43,7 @@ class Tokenizer:
                 return self.read_string_const()
             self.skip_comment()
             if self.current in self.SYMBOLS:
-                return Symbol(self.current);
+                return Symbol(self.current, self.line_count);
             if self.current not in self.WHITESPACE:
                 current_token.append(self.current)
             if self.next in self.STOPERS or not self.next:
@@ -51,17 +54,17 @@ class Tokenizer:
 
     def identify(self, token: str) -> Token:
         if token in self.KEYWORDS:
-            return Keyword(token)
+            return Keyword(token, self.line_count)
         if token[0].isdigit():
-            return IntConst(token)
-        return Identifier(token)
+            return IntConst(token, self.line_count)
+        return Identifier(token, self.line_count)
 
     def read_string_const(self) -> StringConst:
         string = []
         while True:
             self.load_next()
             if self.current == '"':
-                return StringConst(''.join(string))
+                return StringConst(''.join(string), self.line_count)
             else:    
                 string.append(self.current)
 

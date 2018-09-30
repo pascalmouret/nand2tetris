@@ -7,7 +7,8 @@ from compile.token import *
 
 
 class CompilerError(Exception):
-    pass
+    def __init__(self, line: int, message: str) -> None:
+        super().__init__('Line {}: {}'.format(line, message))
 
 
 class Compiler:
@@ -41,7 +42,7 @@ class Compiler:
         try:
             self.current = next(self.tokens)
         except StopIteration:
-            raise CompilerError('Unexpected EOF.')
+            raise CompilerError(self.current.line, 'Unexpected EOF.')
 
     def enter_block(self, name: str) -> None:
         self.write('<{}>'.format(name))
@@ -50,7 +51,7 @@ class Compiler:
     def exit_block(self, name: str) -> None:
         self.depth -=1
         if self.depth < 0:
-            raise CompilerError('Closed unopened block.')
+            raise CompilerError(self.current.line, 'Closed unopened block.')
         self.write('</{}>'.format(name))
 
     def write(self, line: Union[str, Token]) -> None:
@@ -72,7 +73,7 @@ class Compiler:
         if self.current in things or self.current.token in things:
             self.write(self.current)
         else:
-            raise CompilerError('Expected {}, got {} instead.'.format(
+            raise CompilerError(self.current.line, 'Expected {}, got {} instead.'.format(
                 '|'.join([to_string(thing) for thing in things]),
                 self.current.token
             ))
@@ -177,7 +178,10 @@ class Compiler:
         elif self.current == RETURN:
             self.compile_return()
         else:
-            raise CompilerError('Expected let|if|while|do|return, got {} instead.'.format(self.current))
+            raise CompilerError(
+                self.current.line, 
+                'Expected let|if|while|do|return, got {} instead.'.format(self.current)
+            )
             
     def compile_let(self) -> None:
         self.enter_block('letStatement')
@@ -305,7 +309,10 @@ class Compiler:
         elif self.current in self.EXPR_CONST:
             self.verify_is(self.EXPR_CONST)
         else:
-            raise CompilerError('Expected expression term, got {}.'.format(self.current))
+            raise CompilerError(
+                self.current.line,
+                'Expected expression term, got {}.'.format(self.current)
+            )
 
         self.exit_block('term')
         

@@ -61,9 +61,10 @@ CONST_NAME_MAP = dict([(v, k) for k, v in CONST_MAP.items()])
 
 
 class Token:
-    def __init__(self, token: str, const: int) -> None:
+    def __init__(self, token: str, line: int, const: int) -> None:
         self.token = token
         self.const = const
+        self.line = line
 
     def __repr__(self) -> str:
         return '{}({})'.format(self.__class__.__name__, self.token)
@@ -83,21 +84,21 @@ class Token:
         )
 
 class Symbol(Token):
-    def __init__(self, token: str) -> None:
-        super().__init__(token, SYMBOL)
+    def __init__(self, token: str, line: int) -> None:
+        super().__init__(token, line, SYMBOL)
 
 class Identifier(Token):
-    def __init__(self, token: str) -> None:
-        super().__init__(token, IDENTIFIER)
+    def __init__(self, token: str, line: int) -> None:
+        super().__init__(token, line, IDENTIFIER)
 
 class IntConst(Token):
-    def __init__(self, token: str) -> None:
-        super().__init__(token, INT_CONST)
+    def __init__(self, token: str, line: int) -> None:
+        super().__init__(token, line, INT_CONST)
 
 class StringConst(Token):
-    def __init__(self, token: str) -> None:
-        super().__init__(token, STRING_CONST)
+    def __init__(self, token: str, line: int) -> None:
+        super().__init__(token, line, STRING_CONST)
 
 class Keyword(Token):
-    def __init__(self, token: str) -> None:
-        super().__init__(token, CONST_MAP[token])
+    def __init__(self, token: str, line: int) -> None:
+        super().__init__(token, line, CONST_MAP[token])
