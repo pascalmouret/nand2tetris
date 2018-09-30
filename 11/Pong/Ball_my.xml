@@ -6,54 +6,69 @@
     <keyword> field </keyword>
     <keyword> int </keyword>
     <identifier> x </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="True" />
     <symbol> , </symbol>
     <identifier> y </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="True" />
     <symbol> ; </symbol>
   </classVarDec>
   <classVarDec>
     <keyword> field </keyword>
     <keyword> int </keyword>
     <identifier> lengthx </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="True" />
     <symbol> , </symbol>
     <identifier> lengthy </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="3" declared="True" />
     <symbol> ; </symbol>
   </classVarDec>
   <classVarDec>
     <keyword> field </keyword>
     <keyword> int </keyword>
     <identifier> d </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="4" declared="True" />
     <symbol> , </symbol>
     <identifier> straightD </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="5" declared="True" />
     <symbol> , </symbol>
     <identifier> diagonalD </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="6" declared="True" />
     <symbol> ; </symbol>
   </classVarDec>
   <classVarDec>
     <keyword> field </keyword>
     <keyword> boolean </keyword>
     <identifier> invert </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="boolean" index="7" declared="True" />
     <symbol> , </symbol>
     <identifier> positivex </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="boolean" index="8" declared="True" />
     <symbol> , </symbol>
     <identifier> positivey </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="boolean" index="9" declared="True" />
     <symbol> ; </symbol>
   </classVarDec>
   <classVarDec>
     <keyword> field </keyword>
     <keyword> int </keyword>
     <identifier> leftWall </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="10" declared="True" />
     <symbol> , </symbol>
     <identifier> rightWall </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="11" declared="True" />
     <symbol> , </symbol>
     <identifier> topWall </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="12" declared="True" />
     <symbol> , </symbol>
     <identifier> bottomWall </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="13" declared="True" />
     <symbol> ; </symbol>
   </classVarDec>
   <classVarDec>
     <keyword> field </keyword>
     <keyword> int </keyword>
     <identifier> wall </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="14" declared="True" />
     <symbol> ; </symbol>
   </classVarDec>
   <subroutineDec>
@@ -64,21 +79,27 @@
     <parameterList>
       <keyword> int </keyword>
       <identifier> Ax </identifier>
+      <identDesc kind="IdentEnum.ARG" type="int" index="0" declared="True" />
       <symbol> , </symbol>
       <keyword> int </keyword>
       <identifier> Ay </identifier>
+      <identDesc kind="IdentEnum.ARG" type="int" index="1" declared="True" />
       <symbol> , </symbol>
       <keyword> int </keyword>
       <identifier> AleftWall </identifier>
+      <identDesc kind="IdentEnum.ARG" type="int" index="2" declared="True" />
       <symbol> , </symbol>
       <keyword> int </keyword>
       <identifier> ArightWall </identifier>
+      <identDesc kind="IdentEnum.ARG" type="int" index="3" declared="True" />
       <symbol> , </symbol>
       <keyword> int </keyword>
       <identifier> AtopWall </identifier>
+      <identDesc kind="IdentEnum.ARG" type="int" index="4" declared="True" />
       <symbol> , </symbol>
       <keyword> int </keyword>
       <identifier> AbottomWall </identifier>
+      <identDesc kind="IdentEnum.ARG" type="int" index="5" declared="True" />
     </parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
@@ -87,10 +108,12 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> x </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> Ax </identifier>
+              <identDesc kind="IdentEnum.ARG" type="int" index="0" declared="False" />
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -98,10 +121,12 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> y </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> Ay </identifier>
+              <identDesc kind="IdentEnum.ARG" type="int" index="1" declared="False" />
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -109,10 +134,12 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> leftWall </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="10" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> AleftWall </identifier>
+              <identDesc kind="IdentEnum.ARG" type="int" index="2" declared="False" />
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -120,10 +147,12 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> rightWall </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="11" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> ArightWall </identifier>
+              <identDesc kind="IdentEnum.ARG" type="int" index="3" declared="False" />
             </term>
             <symbol> - </symbol>
             <term>
@@ -135,10 +164,12 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> topWall </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="12" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> AtopWall </identifier>
+              <identDesc kind="IdentEnum.ARG" type="int" index="4" declared="False" />
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -146,10 +177,12 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> bottomWall </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="13" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> AbottomWall </identifier>
+              <identDesc kind="IdentEnum.ARG" type="int" index="5" declared="False" />
             </term>
             <symbol> - </symbol>
             <term>
@@ -161,6 +194,7 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> wall </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="14" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
@@ -172,6 +206,7 @@
         <doStatement>
           <keyword> do </keyword>
           <identifier> show </identifier>
+          <identDesc name="show" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
           </expressionList>
@@ -207,6 +242,8 @@
           <identifier> Memory </identifier>
           <symbol> . </symbol>
           <identifier> deAlloc </identifier>
+          <identDesc name="Memory" kind="CLASS" declared="False"/>
+          <identDesc name="deAlloc" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
             <expression>
@@ -242,6 +279,8 @@
           <identifier> Screen </identifier>
           <symbol> . </symbol>
           <identifier> setColor </identifier>
+          <identDesc name="Screen" kind="CLASS" declared="False"/>
+          <identDesc name="setColor" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
             <expression>
@@ -256,6 +295,7 @@
         <doStatement>
           <keyword> do </keyword>
           <identifier> draw </identifier>
+          <identDesc name="draw" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
           </expressionList>
@@ -286,6 +326,8 @@
           <identifier> Screen </identifier>
           <symbol> . </symbol>
           <identifier> setColor </identifier>
+          <identDesc name="Screen" kind="CLASS" declared="False"/>
+          <identDesc name="setColor" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
             <expression>
@@ -300,6 +342,7 @@
         <doStatement>
           <keyword> do </keyword>
           <identifier> draw </identifier>
+          <identDesc name="draw" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
           </expressionList>
@@ -330,23 +373,28 @@
           <identifier> Screen </identifier>
           <symbol> . </symbol>
           <identifier> drawRectangle </identifier>
+          <identDesc name="Screen" kind="CLASS" declared="False"/>
+          <identDesc name="drawRectangle" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
             <expression>
               <term>
                 <identifier> x </identifier>
+                <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
               </term>
             </expression>
             <symbol> , </symbol>
             <expression>
               <term>
                 <identifier> y </identifier>
+                <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
               </term>
             </expression>
             <symbol> , </symbol>
             <expression>
               <term>
                 <identifier> x </identifier>
+                <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
               </term>
               <symbol> + </symbol>
               <term>
@@ -357,6 +405,7 @@
             <expression>
               <term>
                 <identifier> y </identifier>
+                <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
               </term>
               <symbol> + </symbol>
               <term>
@@ -391,6 +440,7 @@
           <expression>
             <term>
               <identifier> x </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -415,6 +465,7 @@
           <expression>
             <term>
               <identifier> x </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
             </term>
             <symbol> + </symbol>
             <term>
@@ -435,9 +486,11 @@
     <parameterList>
       <keyword> int </keyword>
       <identifier> destx </identifier>
+      <identDesc kind="IdentEnum.ARG" type="int" index="0" declared="True" />
       <symbol> , </symbol>
       <keyword> int </keyword>
       <identifier> desty </identifier>
+      <identDesc kind="IdentEnum.ARG" type="int" index="1" declared="True" />
     </parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
@@ -446,24 +499,30 @@
         <keyword> var </keyword>
         <keyword> int </keyword>
         <identifier> dx </identifier>
+        <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="True" />
         <symbol> , </symbol>
         <identifier> dy </identifier>
+        <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="True" />
         <symbol> , </symbol>
         <identifier> temp </identifier>
+        <identDesc kind="IdentEnum.VAR" type="int" index="2" declared="True" />
         <symbol> ; </symbol>
       </varDec>
       <statements>
         <letStatement>
           <keyword> let </keyword>
           <identifier> lengthx </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> destx </identifier>
+              <identDesc kind="IdentEnum.ARG" type="int" index="0" declared="False" />
             </term>
             <symbol> - </symbol>
             <term>
               <identifier> x </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -471,14 +530,17 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> lengthy </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="3" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> desty </identifier>
+              <identDesc kind="IdentEnum.ARG" type="int" index="1" declared="False" />
             </term>
             <symbol> - </symbol>
             <term>
               <identifier> y </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -486,17 +548,21 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> dx </identifier>
+          <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> Math </identifier>
               <symbol> . </symbol>
               <identifier> abs </identifier>
+              <identDesc name="Math" kind="CLASS" declared="False"/>
+              <identDesc name="abs" kind="SUB" declared="False"/>
               <symbol> ( </symbol>
               <expressionList>
                 <expression>
                   <term>
                     <identifier> lengthx </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
                   </term>
                 </expression>
               </expressionList>
@@ -508,17 +574,21 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> dy </identifier>
+          <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> Math </identifier>
               <symbol> . </symbol>
               <identifier> abs </identifier>
+              <identDesc name="Math" kind="CLASS" declared="False"/>
+              <identDesc name="abs" kind="SUB" declared="False"/>
               <symbol> ( </symbol>
               <expressionList>
                 <expression>
                   <term>
                     <identifier> lengthy </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="3" declared="False" />
                   </term>
                 </expression>
               </expressionList>
@@ -530,6 +600,7 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> invert </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="boolean" index="7" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
@@ -537,10 +608,12 @@
               <expression>
                 <term>
                   <identifier> dx </identifier>
+                  <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="False" />
                 </term>
                 <symbol> < </symbol>
                 <term>
                   <identifier> dy </identifier>
+                  <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="False" />
                 </term>
               </expression>
               <symbol> ) </symbol>
@@ -554,6 +627,7 @@
           <expression>
             <term>
               <identifier> invert </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="boolean" index="7" declared="False" />
             </term>
           </expression>
           <symbol> ) </symbol>
@@ -562,10 +636,12 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> temp </identifier>
+              <identDesc kind="IdentEnum.VAR" type="int" index="2" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
                   <identifier> dx </identifier>
+                  <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="False" />
                 </term>
               </expression>
               <symbol> ; </symbol>
@@ -573,10 +649,12 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> dx </identifier>
+              <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
                   <identifier> dy </identifier>
+                  <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="False" />
                 </term>
               </expression>
               <symbol> ; </symbol>
@@ -584,10 +662,12 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> dy </identifier>
+              <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
                   <identifier> temp </identifier>
+                  <identDesc kind="IdentEnum.VAR" type="int" index="2" declared="False" />
                 </term>
               </expression>
               <symbol> ; </symbol>
@@ -595,6 +675,7 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> positivex </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="boolean" index="8" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
@@ -602,10 +683,12 @@
                   <expression>
                     <term>
                       <identifier> y </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                     </term>
                     <symbol> < </symbol>
                     <term>
                       <identifier> desty </identifier>
+                      <identDesc kind="IdentEnum.ARG" type="int" index="1" declared="False" />
                     </term>
                   </expression>
                   <symbol> ) </symbol>
@@ -616,6 +699,7 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> positivey </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="boolean" index="9" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
@@ -623,10 +707,12 @@
                   <expression>
                     <term>
                       <identifier> x </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                     </term>
                     <symbol> < </symbol>
                     <term>
                       <identifier> destx </identifier>
+                      <identDesc kind="IdentEnum.ARG" type="int" index="0" declared="False" />
                     </term>
                   </expression>
                   <symbol> ) </symbol>
@@ -642,6 +728,7 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> positivex </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="boolean" index="8" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
@@ -649,10 +736,12 @@
                   <expression>
                     <term>
                       <identifier> x </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                     </term>
                     <symbol> < </symbol>
                     <term>
                       <identifier> destx </identifier>
+                      <identDesc kind="IdentEnum.ARG" type="int" index="0" declared="False" />
                     </term>
                   </expression>
                   <symbol> ) </symbol>
@@ -663,6 +752,7 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> positivey </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="boolean" index="9" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
@@ -670,10 +760,12 @@
                   <expression>
                     <term>
                       <identifier> y </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                     </term>
                     <symbol> < </symbol>
                     <term>
                       <identifier> desty </identifier>
+                      <identDesc kind="IdentEnum.ARG" type="int" index="1" declared="False" />
                     </term>
                   </expression>
                   <symbol> ) </symbol>
@@ -687,6 +779,7 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> d </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="4" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
@@ -698,6 +791,7 @@
                 <symbol> * </symbol>
                 <term>
                   <identifier> dy </identifier>
+                  <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="False" />
                 </term>
               </expression>
               <symbol> ) </symbol>
@@ -705,6 +799,7 @@
             <symbol> - </symbol>
             <term>
               <identifier> dx </identifier>
+              <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="False" />
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -712,6 +807,7 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> straightD </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="5" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
@@ -720,6 +816,7 @@
             <symbol> * </symbol>
             <term>
               <identifier> dy </identifier>
+              <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="False" />
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -727,6 +824,7 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> diagonalD </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="6" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
@@ -738,10 +836,12 @@
               <expression>
                 <term>
                   <identifier> dy </identifier>
+                  <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="False" />
                 </term>
                 <symbol> - </symbol>
                 <term>
                   <identifier> dx </identifier>
+                  <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="False" />
                 </term>
               </expression>
               <symbol> ) </symbol>
@@ -771,6 +871,7 @@
         <doStatement>
           <keyword> do </keyword>
           <identifier> hide </identifier>
+          <identDesc name="hide" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
           </expressionList>
@@ -783,6 +884,7 @@
           <expression>
             <term>
               <identifier> d </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="4" declared="False" />
             </term>
             <symbol> < </symbol>
             <term>
@@ -795,14 +897,17 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> d </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="4" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
                   <identifier> d </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="4" declared="False" />
                 </term>
                 <symbol> + </symbol>
                 <term>
                   <identifier> straightD </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="5" declared="False" />
                 </term>
               </expression>
               <symbol> ; </symbol>
@@ -815,14 +920,17 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> d </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="4" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
                   <identifier> d </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="4" declared="False" />
                 </term>
                 <symbol> + </symbol>
                 <term>
                   <identifier> diagonalD </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="6" declared="False" />
                 </term>
               </expression>
               <symbol> ; </symbol>
@@ -833,6 +941,7 @@
               <expression>
                 <term>
                   <identifier> positivey </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="boolean" index="9" declared="False" />
                 </term>
               </expression>
               <symbol> ) </symbol>
@@ -844,6 +953,7 @@
                   <expression>
                     <term>
                       <identifier> invert </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="boolean" index="7" declared="False" />
                     </term>
                   </expression>
                   <symbol> ) </symbol>
@@ -852,10 +962,12 @@
                     <letStatement>
                       <keyword> let </keyword>
                       <identifier> x </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                       <symbol> = </symbol>
                       <expression>
                         <term>
                           <identifier> x </identifier>
+                          <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                         </term>
                         <symbol> + </symbol>
                         <term>
@@ -872,10 +984,12 @@
                     <letStatement>
                       <keyword> let </keyword>
                       <identifier> y </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                       <symbol> = </symbol>
                       <expression>
                         <term>
                           <identifier> y </identifier>
+                          <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                         </term>
                         <symbol> + </symbol>
                         <term>
@@ -898,6 +1012,7 @@
                   <expression>
                     <term>
                       <identifier> invert </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="boolean" index="7" declared="False" />
                     </term>
                   </expression>
                   <symbol> ) </symbol>
@@ -906,10 +1021,12 @@
                     <letStatement>
                       <keyword> let </keyword>
                       <identifier> x </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                       <symbol> = </symbol>
                       <expression>
                         <term>
                           <identifier> x </identifier>
+                          <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                         </term>
                         <symbol> - </symbol>
                         <term>
@@ -926,10 +1043,12 @@
                     <letStatement>
                       <keyword> let </keyword>
                       <identifier> y </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                       <symbol> = </symbol>
                       <expression>
                         <term>
                           <identifier> y </identifier>
+                          <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                         </term>
                         <symbol> - </symbol>
                         <term>
@@ -953,6 +1072,7 @@
           <expression>
             <term>
               <identifier> positivex </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="boolean" index="8" declared="False" />
             </term>
           </expression>
           <symbol> ) </symbol>
@@ -964,6 +1084,7 @@
               <expression>
                 <term>
                   <identifier> invert </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="boolean" index="7" declared="False" />
                 </term>
               </expression>
               <symbol> ) </symbol>
@@ -972,10 +1093,12 @@
                 <letStatement>
                   <keyword> let </keyword>
                   <identifier> y </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                   <symbol> = </symbol>
                   <expression>
                     <term>
                       <identifier> y </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                     </term>
                     <symbol> + </symbol>
                     <term>
@@ -992,10 +1115,12 @@
                 <letStatement>
                   <keyword> let </keyword>
                   <identifier> x </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                   <symbol> = </symbol>
                   <expression>
                     <term>
                       <identifier> x </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                     </term>
                     <symbol> + </symbol>
                     <term>
@@ -1018,6 +1143,7 @@
               <expression>
                 <term>
                   <identifier> invert </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="boolean" index="7" declared="False" />
                 </term>
               </expression>
               <symbol> ) </symbol>
@@ -1026,10 +1152,12 @@
                 <letStatement>
                   <keyword> let </keyword>
                   <identifier> y </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                   <symbol> = </symbol>
                   <expression>
                     <term>
                       <identifier> y </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                     </term>
                     <symbol> - </symbol>
                     <term>
@@ -1046,10 +1174,12 @@
                 <letStatement>
                   <keyword> let </keyword>
                   <identifier> x </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                   <symbol> = </symbol>
                   <expression>
                     <term>
                       <identifier> x </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                     </term>
                     <symbol> - </symbol>
                     <term>
@@ -1075,10 +1205,12 @@
                 <expression>
                   <term>
                     <identifier> x </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                   </term>
                   <symbol> > </symbol>
                   <term>
                     <identifier> leftWall </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="10" declared="False" />
                   </term>
                 </expression>
                 <symbol> ) </symbol>
@@ -1091,6 +1223,7 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> wall </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="14" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
@@ -1102,10 +1235,12 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> x </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
                   <identifier> leftWall </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="10" declared="False" />
                 </term>
               </expression>
               <symbol> ; </symbol>
@@ -1124,10 +1259,12 @@
                 <expression>
                   <term>
                     <identifier> x </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                   </term>
                   <symbol> < </symbol>
                   <term>
                     <identifier> rightWall </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="11" declared="False" />
                   </term>
                 </expression>
                 <symbol> ) </symbol>
@@ -1140,6 +1277,7 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> wall </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="14" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
@@ -1151,10 +1289,12 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> x </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
                   <identifier> rightWall </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="11" declared="False" />
                 </term>
               </expression>
               <symbol> ; </symbol>
@@ -1173,10 +1313,12 @@
                 <expression>
                   <term>
                     <identifier> y </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                   </term>
                   <symbol> > </symbol>
                   <term>
                     <identifier> topWall </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="12" declared="False" />
                   </term>
                 </expression>
                 <symbol> ) </symbol>
@@ -1189,6 +1331,7 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> wall </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="14" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
@@ -1200,10 +1343,12 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> y </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
                   <identifier> topWall </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="12" declared="False" />
                 </term>
               </expression>
               <symbol> ; </symbol>
@@ -1222,10 +1367,12 @@
                 <expression>
                   <term>
                     <identifier> y </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                   </term>
                   <symbol> < </symbol>
                   <term>
                     <identifier> bottomWall </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="13" declared="False" />
                   </term>
                 </expression>
                 <symbol> ) </symbol>
@@ -1238,6 +1385,7 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> wall </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="14" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
@@ -1249,10 +1397,12 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> y </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
                   <identifier> bottomWall </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="13" declared="False" />
                 </term>
               </expression>
               <symbol> ; </symbol>
@@ -1263,6 +1413,7 @@
         <doStatement>
           <keyword> do </keyword>
           <identifier> show </identifier>
+          <identDesc name="show" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
           </expressionList>
@@ -1274,6 +1425,7 @@
           <expression>
             <term>
               <identifier> wall </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="14" declared="False" />
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -1290,6 +1442,7 @@
     <parameterList>
       <keyword> int </keyword>
       <identifier> bouncingDirection </identifier>
+      <identDesc kind="IdentEnum.ARG" type="int" index="0" declared="True" />
     </parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
@@ -1298,24 +1451,31 @@
         <keyword> var </keyword>
         <keyword> int </keyword>
         <identifier> newx </identifier>
+        <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="True" />
         <symbol> , </symbol>
         <identifier> newy </identifier>
+        <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="True" />
         <symbol> , </symbol>
         <identifier> divLengthx </identifier>
+        <identDesc kind="IdentEnum.VAR" type="int" index="2" declared="True" />
         <symbol> , </symbol>
         <identifier> divLengthy </identifier>
+        <identDesc kind="IdentEnum.VAR" type="int" index="3" declared="True" />
         <symbol> , </symbol>
         <identifier> factor </identifier>
+        <identDesc kind="IdentEnum.VAR" type="int" index="4" declared="True" />
         <symbol> ; </symbol>
       </varDec>
       <statements>
         <letStatement>
           <keyword> let </keyword>
           <identifier> divLengthx </identifier>
+          <identDesc kind="IdentEnum.VAR" type="int" index="2" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> lengthx </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
             </term>
             <symbol> / </symbol>
             <term>
@@ -1327,10 +1487,12 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> divLengthy </identifier>
+          <identDesc kind="IdentEnum.VAR" type="int" index="3" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> lengthy </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="3" declared="False" />
             </term>
             <symbol> / </symbol>
             <term>
@@ -1345,6 +1507,7 @@
           <expression>
             <term>
               <identifier> bouncingDirection </identifier>
+              <identDesc kind="IdentEnum.ARG" type="int" index="0" declared="False" />
             </term>
             <symbol> = </symbol>
             <term>
@@ -1357,6 +1520,7 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> factor </identifier>
+              <identDesc kind="IdentEnum.VAR" type="int" index="4" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
@@ -1387,6 +1551,7 @@
                             <expression>
                               <term>
                                 <identifier> lengthx </identifier>
+                                <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
                               </term>
                               <symbol> < </symbol>
                               <term>
@@ -1405,6 +1570,7 @@
                       <expression>
                         <term>
                           <identifier> bouncingDirection </identifier>
+                          <identDesc kind="IdentEnum.ARG" type="int" index="0" declared="False" />
                         </term>
                         <symbol> = </symbol>
                         <term>
@@ -1425,6 +1591,7 @@
                       <expression>
                         <term>
                           <identifier> lengthx </identifier>
+                          <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
                         </term>
                         <symbol> < </symbol>
                         <term>
@@ -1439,6 +1606,7 @@
                       <expression>
                         <term>
                           <identifier> bouncingDirection </identifier>
+                          <identDesc kind="IdentEnum.ARG" type="int" index="0" declared="False" />
                         </term>
                         <symbol> = </symbol>
                         <term>
@@ -1466,6 +1634,7 @@
                 <letStatement>
                   <keyword> let </keyword>
                   <identifier> factor </identifier>
+                  <identDesc kind="IdentEnum.VAR" type="int" index="4" declared="False" />
                   <symbol> = </symbol>
                   <expression>
                     <term>
@@ -1482,6 +1651,7 @@
                 <letStatement>
                   <keyword> let </keyword>
                   <identifier> factor </identifier>
+                  <identDesc kind="IdentEnum.VAR" type="int" index="4" declared="False" />
                   <symbol> = </symbol>
                   <expression>
                     <term>
@@ -1502,6 +1672,7 @@
           <expression>
             <term>
               <identifier> wall </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="14" declared="False" />
             </term>
             <symbol> = </symbol>
             <term>
@@ -1514,6 +1685,7 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> newx </identifier>
+              <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
@@ -1525,6 +1697,7 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> newy </identifier>
+              <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
@@ -1532,6 +1705,7 @@
                   <expression>
                     <term>
                       <identifier> divLengthy </identifier>
+                      <identDesc kind="IdentEnum.VAR" type="int" index="3" declared="False" />
                     </term>
                     <symbol> * </symbol>
                     <term>
@@ -1552,6 +1726,7 @@
                 <symbol> / </symbol>
                 <term>
                   <identifier> divLengthx </identifier>
+                  <identDesc kind="IdentEnum.VAR" type="int" index="2" declared="False" />
                 </term>
               </expression>
               <symbol> ; </symbol>
@@ -1559,10 +1734,12 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> newy </identifier>
+              <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
                   <identifier> y </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                 </term>
                 <symbol> + </symbol>
                 <term>
@@ -1570,10 +1747,12 @@
                   <expression>
                     <term>
                       <identifier> newy </identifier>
+                      <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="False" />
                     </term>
                     <symbol> * </symbol>
                     <term>
                       <identifier> factor </identifier>
+                      <identDesc kind="IdentEnum.VAR" type="int" index="4" declared="False" />
                     </term>
                   </expression>
                   <symbol> ) </symbol>
@@ -1592,6 +1771,7 @@
               <expression>
                 <term>
                   <identifier> wall </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="14" declared="False" />
                 </term>
                 <symbol> = </symbol>
                 <term>
@@ -1604,6 +1784,7 @@
                 <letStatement>
                   <keyword> let </keyword>
                   <identifier> newx </identifier>
+                  <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="False" />
                   <symbol> = </symbol>
                   <expression>
                     <term>
@@ -1615,6 +1796,7 @@
                 <letStatement>
                   <keyword> let </keyword>
                   <identifier> newy </identifier>
+                  <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="False" />
                   <symbol> = </symbol>
                   <expression>
                     <term>
@@ -1622,6 +1804,7 @@
                       <expression>
                         <term>
                           <identifier> divLengthy </identifier>
+                          <identDesc kind="IdentEnum.VAR" type="int" index="3" declared="False" />
                         </term>
                         <symbol> * </symbol>
                         <term>
@@ -1633,6 +1816,7 @@
                     <symbol> / </symbol>
                     <term>
                       <identifier> divLengthx </identifier>
+                      <identDesc kind="IdentEnum.VAR" type="int" index="2" declared="False" />
                     </term>
                   </expression>
                   <symbol> ; </symbol>
@@ -1640,10 +1824,12 @@
                 <letStatement>
                   <keyword> let </keyword>
                   <identifier> newy </identifier>
+                  <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="False" />
                   <symbol> = </symbol>
                   <expression>
                     <term>
                       <identifier> y </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                     </term>
                     <symbol> + </symbol>
                     <term>
@@ -1651,10 +1837,12 @@
                       <expression>
                         <term>
                           <identifier> newy </identifier>
+                          <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="False" />
                         </term>
                         <symbol> * </symbol>
                         <term>
                           <identifier> factor </identifier>
+                          <identDesc kind="IdentEnum.VAR" type="int" index="4" declared="False" />
                         </term>
                       </expression>
                       <symbol> ) </symbol>
@@ -1673,6 +1861,7 @@
                   <expression>
                     <term>
                       <identifier> wall </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="int" index="14" declared="False" />
                     </term>
                     <symbol> = </symbol>
                     <term>
@@ -1685,6 +1874,7 @@
                     <letStatement>
                       <keyword> let </keyword>
                       <identifier> newy </identifier>
+                      <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="False" />
                       <symbol> = </symbol>
                       <expression>
                         <term>
@@ -1696,6 +1886,7 @@
                     <letStatement>
                       <keyword> let </keyword>
                       <identifier> newx </identifier>
+                      <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="False" />
                       <symbol> = </symbol>
                       <expression>
                         <term>
@@ -1703,6 +1894,7 @@
                           <expression>
                             <term>
                               <identifier> divLengthx </identifier>
+                              <identDesc kind="IdentEnum.VAR" type="int" index="2" declared="False" />
                             </term>
                             <symbol> * </symbol>
                             <term>
@@ -1723,6 +1915,7 @@
                         <symbol> / </symbol>
                         <term>
                           <identifier> divLengthy </identifier>
+                          <identDesc kind="IdentEnum.VAR" type="int" index="3" declared="False" />
                         </term>
                       </expression>
                       <symbol> ; </symbol>
@@ -1730,10 +1923,12 @@
                     <letStatement>
                       <keyword> let </keyword>
                       <identifier> newx </identifier>
+                      <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="False" />
                       <symbol> = </symbol>
                       <expression>
                         <term>
                           <identifier> x </identifier>
+                          <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                         </term>
                         <symbol> + </symbol>
                         <term>
@@ -1741,10 +1936,12 @@
                           <expression>
                             <term>
                               <identifier> newx </identifier>
+                              <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="False" />
                             </term>
                             <symbol> * </symbol>
                             <term>
                               <identifier> factor </identifier>
+                              <identDesc kind="IdentEnum.VAR" type="int" index="4" declared="False" />
                             </term>
                           </expression>
                           <symbol> ) </symbol>
@@ -1760,6 +1957,7 @@
                     <letStatement>
                       <keyword> let </keyword>
                       <identifier> newy </identifier>
+                      <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="False" />
                       <symbol> = </symbol>
                       <expression>
                         <term>
@@ -1771,6 +1969,7 @@
                     <letStatement>
                       <keyword> let </keyword>
                       <identifier> newx </identifier>
+                      <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="False" />
                       <symbol> = </symbol>
                       <expression>
                         <term>
@@ -1778,6 +1977,7 @@
                           <expression>
                             <term>
                               <identifier> divLengthx </identifier>
+                              <identDesc kind="IdentEnum.VAR" type="int" index="2" declared="False" />
                             </term>
                             <symbol> * </symbol>
                             <term>
@@ -1789,6 +1989,7 @@
                         <symbol> / </symbol>
                         <term>
                           <identifier> divLengthy </identifier>
+                          <identDesc kind="IdentEnum.VAR" type="int" index="3" declared="False" />
                         </term>
                       </expression>
                       <symbol> ; </symbol>
@@ -1796,10 +1997,12 @@
                     <letStatement>
                       <keyword> let </keyword>
                       <identifier> newx </identifier>
+                      <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="False" />
                       <symbol> = </symbol>
                       <expression>
                         <term>
                           <identifier> x </identifier>
+                          <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                         </term>
                         <symbol> + </symbol>
                         <term>
@@ -1807,10 +2010,12 @@
                           <expression>
                             <term>
                               <identifier> newx </identifier>
+                              <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="False" />
                             </term>
                             <symbol> * </symbol>
                             <term>
                               <identifier> factor </identifier>
+                              <identDesc kind="IdentEnum.VAR" type="int" index="4" declared="False" />
                             </term>
                           </expression>
                           <symbol> ) </symbol>
@@ -1830,17 +2035,20 @@
         <doStatement>
           <keyword> do </keyword>
           <identifier> setDestination </identifier>
+          <identDesc name="setDestination" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
             <expression>
               <term>
                 <identifier> newx </identifier>
+                <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="False" />
               </term>
             </expression>
             <symbol> , </symbol>
             <expression>
               <term>
                 <identifier> newy </identifier>
+                <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="False" />
               </term>
             </expression>
           </expressionList>

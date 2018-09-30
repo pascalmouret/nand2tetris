@@ -16,6 +16,7 @@
         <keyword> var </keyword>
         <identifier> PongGame </identifier>
         <identifier> game </identifier>
+        <identDesc kind="IdentEnum.VAR" type="PongGame" index="0" declared="True" />
         <symbol> ; </symbol>
       </varDec>
       <statements>
@@ -24,6 +25,8 @@
           <identifier> PongGame </identifier>
           <symbol> . </symbol>
           <identifier> newInstance </identifier>
+          <identDesc name="PongGame" kind="CLASS" declared="False"/>
+          <identDesc name="newInstance" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
           </expressionList>
@@ -33,12 +36,15 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> game </identifier>
+          <identDesc kind="IdentEnum.VAR" type="PongGame" index="0" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> PongGame </identifier>
               <symbol> . </symbol>
               <identifier> getInstance </identifier>
+              <identDesc name="PongGame" kind="CLASS" declared="False"/>
+              <identDesc name="getInstance" kind="SUB" declared="False"/>
               <symbol> ( </symbol>
               <expressionList>
               </expressionList>
@@ -52,6 +58,8 @@
           <identifier> game </identifier>
           <symbol> . </symbol>
           <identifier> run </identifier>
+          <identDesc name="game" kind="CLASS" declared="False"/>
+          <identDesc name="run" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
           </expressionList>
@@ -63,6 +71,8 @@
           <identifier> game </identifier>
           <symbol> . </symbol>
           <identifier> dispose </identifier>
+          <identDesc name="game" kind="CLASS" declared="False"/>
+          <identDesc name="dispose" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
           </expressionList>

@@ -6,48 +6,56 @@
     <keyword> static </keyword>
     <identifier> PongGame </identifier>
     <identifier> instance </identifier>
+    <identDesc kind="IdentEnum.STATIC" type="PongGame" index="0" declared="True" />
     <symbol> ; </symbol>
   </classVarDec>
   <classVarDec>
     <keyword> field </keyword>
     <identifier> Bat </identifier>
     <identifier> bat </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="Bat" index="0" declared="True" />
     <symbol> ; </symbol>
   </classVarDec>
   <classVarDec>
     <keyword> field </keyword>
     <identifier> Ball </identifier>
     <identifier> ball </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="Ball" index="1" declared="True" />
     <symbol> ; </symbol>
   </classVarDec>
   <classVarDec>
     <keyword> field </keyword>
     <keyword> int </keyword>
     <identifier> wall </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="True" />
     <symbol> ; </symbol>
   </classVarDec>
   <classVarDec>
     <keyword> field </keyword>
     <keyword> boolean </keyword>
     <identifier> exit </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="boolean" index="3" declared="True" />
     <symbol> ; </symbol>
   </classVarDec>
   <classVarDec>
     <keyword> field </keyword>
     <keyword> int </keyword>
     <identifier> score </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="4" declared="True" />
     <symbol> ; </symbol>
   </classVarDec>
   <classVarDec>
     <keyword> field </keyword>
     <keyword> int </keyword>
     <identifier> lastWall </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="5" declared="True" />
     <symbol> ; </symbol>
   </classVarDec>
   <classVarDec>
     <keyword> field </keyword>
     <keyword> int </keyword>
     <identifier> batWidth </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="6" declared="True" />
     <symbol> ; </symbol>
   </classVarDec>
   <subroutineDec>
@@ -66,6 +74,8 @@
           <identifier> Screen </identifier>
           <symbol> . </symbol>
           <identifier> clearScreen </identifier>
+          <identDesc name="Screen" kind="CLASS" declared="False"/>
+          <identDesc name="clearScreen" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
           </expressionList>
@@ -75,6 +85,7 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> batWidth </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="6" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
@@ -86,12 +97,15 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> bat </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="Bat" index="0" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> Bat </identifier>
               <symbol> . </symbol>
               <identifier> new </identifier>
+              <identDesc name="Bat" kind="CLASS" declared="False"/>
+              <identDesc name="new" kind="SUB" declared="False"/>
               <symbol> ( </symbol>
               <expressionList>
                 <expression>
@@ -109,6 +123,7 @@
                 <expression>
                   <term>
                     <identifier> batWidth </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="6" declared="False" />
                   </term>
                 </expression>
                 <symbol> , </symbol>
@@ -126,12 +141,15 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> ball </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="Ball" index="1" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> Ball </identifier>
               <symbol> . </symbol>
               <identifier> new </identifier>
+              <identDesc name="Ball" kind="CLASS" declared="False"/>
+              <identDesc name="new" kind="SUB" declared="False"/>
               <symbol> ( </symbol>
               <expressionList>
                 <expression>
@@ -180,6 +198,8 @@
           <identifier> ball </identifier>
           <symbol> . </symbol>
           <identifier> setDestination </identifier>
+          <identDesc name="ball" kind="CLASS" declared="False"/>
+          <identDesc name="setDestination" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
             <expression>
@@ -202,6 +222,8 @@
           <identifier> Screen </identifier>
           <symbol> . </symbol>
           <identifier> drawRectangle </identifier>
+          <identDesc name="Screen" kind="CLASS" declared="False"/>
+          <identDesc name="drawRectangle" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
             <expression>
@@ -236,6 +258,8 @@
           <identifier> Output </identifier>
           <symbol> . </symbol>
           <identifier> moveCursor </identifier>
+          <identDesc name="Output" kind="CLASS" declared="False"/>
+          <identDesc name="moveCursor" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
             <expression>
@@ -258,6 +282,8 @@
           <identifier> Output </identifier>
           <symbol> . </symbol>
           <identifier> printString </identifier>
+          <identDesc name="Output" kind="CLASS" declared="False"/>
+          <identDesc name="printString" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
             <expression>
@@ -272,6 +298,7 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> exit </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="boolean" index="3" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
@@ -283,6 +310,7 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> score </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="4" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
@@ -294,6 +322,7 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> wall </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
@@ -305,6 +334,7 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> lastWall </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="5" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
@@ -342,6 +372,8 @@
           <identifier> bat </identifier>
           <symbol> . </symbol>
           <identifier> dispose </identifier>
+          <identDesc name="bat" kind="CLASS" declared="False"/>
+          <identDesc name="dispose" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
           </expressionList>
@@ -353,6 +385,8 @@
           <identifier> ball </identifier>
           <symbol> . </symbol>
           <identifier> dispose </identifier>
+          <identDesc name="ball" kind="CLASS" declared="False"/>
+          <identDesc name="dispose" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
           </expressionList>
@@ -364,6 +398,8 @@
           <identifier> Memory </identifier>
           <symbol> . </symbol>
           <identifier> deAlloc </identifier>
+          <identDesc name="Memory" kind="CLASS" declared="False"/>
+          <identDesc name="deAlloc" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
             <expression>
@@ -397,12 +433,15 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> instance </identifier>
+          <identDesc kind="IdentEnum.STATIC" type="PongGame" index="0" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> PongGame </identifier>
               <symbol> . </symbol>
               <identifier> new </identifier>
+              <identDesc name="PongGame" kind="CLASS" declared="False"/>
+              <identDesc name="new" kind="SUB" declared="False"/>
               <symbol> ( </symbol>
               <expressionList>
               </expressionList>
@@ -435,6 +474,7 @@
           <expression>
             <term>
               <identifier> instance </identifier>
+              <identDesc kind="IdentEnum.STATIC" type="PongGame" index="0" declared="False" />
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -457,6 +497,7 @@
         <keyword> var </keyword>
         <keyword> char </keyword>
         <identifier> key </identifier>
+        <identDesc kind="IdentEnum.VAR" type="char" index="0" declared="True" />
         <symbol> ; </symbol>
       </varDec>
       <statements>
@@ -468,6 +509,7 @@
               <symbol> ~ </symbol>
               <term>
                 <identifier> exit </identifier>
+                <identDesc kind="IdentEnum.FIELD" type="boolean" index="3" declared="False" />
               </term>
             </term>
           </expression>
@@ -483,6 +525,7 @@
                   <expression>
                     <term>
                       <identifier> key </identifier>
+                      <identDesc kind="IdentEnum.VAR" type="char" index="0" declared="False" />
                     </term>
                     <symbol> = </symbol>
                     <term>
@@ -499,6 +542,7 @@
                       <symbol> ~ </symbol>
                       <term>
                         <identifier> exit </identifier>
+                        <identDesc kind="IdentEnum.FIELD" type="boolean" index="3" declared="False" />
                       </term>
                     </term>
                   </expression>
@@ -511,12 +555,15 @@
                 <letStatement>
                   <keyword> let </keyword>
                   <identifier> key </identifier>
+                  <identDesc kind="IdentEnum.VAR" type="char" index="0" declared="False" />
                   <symbol> = </symbol>
                   <expression>
                     <term>
                       <identifier> Keyboard </identifier>
                       <symbol> . </symbol>
                       <identifier> keyPressed </identifier>
+                      <identDesc name="Keyboard" kind="CLASS" declared="False"/>
+                      <identDesc name="keyPressed" kind="SUB" declared="False"/>
                       <symbol> ( </symbol>
                       <expressionList>
                       </expressionList>
@@ -530,6 +577,8 @@
                   <identifier> bat </identifier>
                   <symbol> . </symbol>
                   <identifier> move </identifier>
+                  <identDesc name="bat" kind="CLASS" declared="False"/>
+                  <identDesc name="move" kind="SUB" declared="False"/>
                   <symbol> ( </symbol>
                   <expressionList>
                   </expressionList>
@@ -539,6 +588,7 @@
                 <doStatement>
                   <keyword> do </keyword>
                   <identifier> moveBall </identifier>
+                  <identDesc name="moveBall" kind="SUB" declared="False"/>
                   <symbol> ( </symbol>
                   <expressionList>
                   </expressionList>
@@ -550,6 +600,8 @@
                   <identifier> Sys </identifier>
                   <symbol> . </symbol>
                   <identifier> wait </identifier>
+                  <identDesc name="Sys" kind="CLASS" declared="False"/>
+                  <identDesc name="wait" kind="SUB" declared="False"/>
                   <symbol> ( </symbol>
                   <expressionList>
                     <expression>
@@ -570,6 +622,7 @@
               <expression>
                 <term>
                   <identifier> key </identifier>
+                  <identDesc kind="IdentEnum.VAR" type="char" index="0" declared="False" />
                 </term>
                 <symbol> = </symbol>
                 <term>
@@ -584,6 +637,8 @@
                   <identifier> bat </identifier>
                   <symbol> . </symbol>
                   <identifier> setDirection </identifier>
+                  <identDesc name="bat" kind="CLASS" declared="False"/>
+                  <identDesc name="setDirection" kind="SUB" declared="False"/>
                   <symbol> ( </symbol>
                   <expressionList>
                     <expression>
@@ -606,6 +661,7 @@
                   <expression>
                     <term>
                       <identifier> key </identifier>
+                      <identDesc kind="IdentEnum.VAR" type="char" index="0" declared="False" />
                     </term>
                     <symbol> = </symbol>
                     <term>
@@ -620,6 +676,8 @@
                       <identifier> bat </identifier>
                       <symbol> . </symbol>
                       <identifier> setDirection </identifier>
+                      <identDesc name="bat" kind="CLASS" declared="False"/>
+                      <identDesc name="setDirection" kind="SUB" declared="False"/>
                       <symbol> ( </symbol>
                       <expressionList>
                         <expression>
@@ -642,6 +700,7 @@
                       <expression>
                         <term>
                           <identifier> key </identifier>
+                          <identDesc kind="IdentEnum.VAR" type="char" index="0" declared="False" />
                         </term>
                         <symbol> = </symbol>
                         <term>
@@ -654,6 +713,7 @@
                         <letStatement>
                           <keyword> let </keyword>
                           <identifier> exit </identifier>
+                          <identDesc kind="IdentEnum.FIELD" type="boolean" index="3" declared="False" />
                           <symbol> = </symbol>
                           <expression>
                             <term>
@@ -685,6 +745,7 @@
                         <expression>
                           <term>
                             <identifier> key </identifier>
+                            <identDesc kind="IdentEnum.VAR" type="char" index="0" declared="False" />
                           </term>
                           <symbol> = </symbol>
                           <term>
@@ -705,6 +766,7 @@
                       <symbol> ~ </symbol>
                       <term>
                         <identifier> exit </identifier>
+                        <identDesc kind="IdentEnum.FIELD" type="boolean" index="3" declared="False" />
                       </term>
                     </term>
                   </expression>
@@ -717,12 +779,15 @@
                 <letStatement>
                   <keyword> let </keyword>
                   <identifier> key </identifier>
+                  <identDesc kind="IdentEnum.VAR" type="char" index="0" declared="False" />
                   <symbol> = </symbol>
                   <expression>
                     <term>
                       <identifier> Keyboard </identifier>
                       <symbol> . </symbol>
                       <identifier> keyPressed </identifier>
+                      <identDesc name="Keyboard" kind="CLASS" declared="False"/>
+                      <identDesc name="keyPressed" kind="SUB" declared="False"/>
                       <symbol> ( </symbol>
                       <expressionList>
                       </expressionList>
@@ -736,6 +801,8 @@
                   <identifier> bat </identifier>
                   <symbol> . </symbol>
                   <identifier> move </identifier>
+                  <identDesc name="bat" kind="CLASS" declared="False"/>
+                  <identDesc name="move" kind="SUB" declared="False"/>
                   <symbol> ( </symbol>
                   <expressionList>
                   </expressionList>
@@ -745,6 +812,7 @@
                 <doStatement>
                   <keyword> do </keyword>
                   <identifier> moveBall </identifier>
+                  <identDesc name="moveBall" kind="SUB" declared="False"/>
                   <symbol> ( </symbol>
                   <expressionList>
                   </expressionList>
@@ -756,6 +824,8 @@
                   <identifier> Sys </identifier>
                   <symbol> . </symbol>
                   <identifier> wait </identifier>
+                  <identDesc name="Sys" kind="CLASS" declared="False"/>
+                  <identDesc name="wait" kind="SUB" declared="False"/>
                   <symbol> ( </symbol>
                   <expressionList>
                     <expression>
@@ -779,6 +849,7 @@
           <expression>
             <term>
               <identifier> exit </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="boolean" index="3" declared="False" />
             </term>
           </expression>
           <symbol> ) </symbol>
@@ -789,6 +860,8 @@
               <identifier> Output </identifier>
               <symbol> . </symbol>
               <identifier> moveCursor </identifier>
+              <identDesc name="Output" kind="CLASS" declared="False"/>
+              <identDesc name="moveCursor" kind="SUB" declared="False"/>
               <symbol> ( </symbol>
               <expressionList>
                 <expression>
@@ -811,6 +884,8 @@
               <identifier> Output </identifier>
               <symbol> . </symbol>
               <identifier> printString </identifier>
+              <identDesc name="Output" kind="CLASS" declared="False"/>
+              <identDesc name="printString" kind="SUB" declared="False"/>
               <symbol> ( </symbol>
               <expressionList>
                 <expression>
@@ -847,26 +922,34 @@
         <keyword> var </keyword>
         <keyword> int </keyword>
         <identifier> bouncingDirection </identifier>
+        <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="True" />
         <symbol> , </symbol>
         <identifier> batLeft </identifier>
+        <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="True" />
         <symbol> , </symbol>
         <identifier> batRight </identifier>
+        <identDesc kind="IdentEnum.VAR" type="int" index="2" declared="True" />
         <symbol> , </symbol>
         <identifier> ballLeft </identifier>
+        <identDesc kind="IdentEnum.VAR" type="int" index="3" declared="True" />
         <symbol> , </symbol>
         <identifier> ballRight </identifier>
+        <identDesc kind="IdentEnum.VAR" type="int" index="4" declared="True" />
         <symbol> ; </symbol>
       </varDec>
       <statements>
         <letStatement>
           <keyword> let </keyword>
           <identifier> wall </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> ball </identifier>
               <symbol> . </symbol>
               <identifier> move </identifier>
+              <identDesc name="ball" kind="CLASS" declared="False"/>
+              <identDesc name="move" kind="SUB" declared="False"/>
               <symbol> ( </symbol>
               <expressionList>
               </expressionList>
@@ -884,6 +967,7 @@
               <expression>
                 <term>
                   <identifier> wall </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
                 </term>
                 <symbol> > </symbol>
                 <term>
@@ -903,10 +987,12 @@
                     <expression>
                       <term>
                         <identifier> wall </identifier>
+                        <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
                       </term>
                       <symbol> = </symbol>
                       <term>
                         <identifier> lastWall </identifier>
+                        <identDesc kind="IdentEnum.FIELD" type="int" index="5" declared="False" />
                       </term>
                     </expression>
                     <symbol> ) </symbol>
@@ -922,10 +1008,12 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> lastWall </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="5" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
                   <identifier> wall </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
                 </term>
               </expression>
               <symbol> ; </symbol>
@@ -933,6 +1021,7 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> bouncingDirection </identifier>
+              <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
@@ -944,12 +1033,15 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> batLeft </identifier>
+              <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
                   <identifier> bat </identifier>
                   <symbol> . </symbol>
                   <identifier> getLeft </identifier>
+                  <identDesc name="bat" kind="CLASS" declared="False"/>
+                  <identDesc name="getLeft" kind="SUB" declared="False"/>
                   <symbol> ( </symbol>
                   <expressionList>
                   </expressionList>
@@ -961,12 +1053,15 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> batRight </identifier>
+              <identDesc kind="IdentEnum.VAR" type="int" index="2" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
                   <identifier> bat </identifier>
                   <symbol> . </symbol>
                   <identifier> getRight </identifier>
+                  <identDesc name="bat" kind="CLASS" declared="False"/>
+                  <identDesc name="getRight" kind="SUB" declared="False"/>
                   <symbol> ( </symbol>
                   <expressionList>
                   </expressionList>
@@ -978,12 +1073,15 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> ballLeft </identifier>
+              <identDesc kind="IdentEnum.VAR" type="int" index="3" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
                   <identifier> ball </identifier>
                   <symbol> . </symbol>
                   <identifier> getLeft </identifier>
+                  <identDesc name="ball" kind="CLASS" declared="False"/>
+                  <identDesc name="getLeft" kind="SUB" declared="False"/>
                   <symbol> ( </symbol>
                   <expressionList>
                   </expressionList>
@@ -995,12 +1093,15 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> ballRight </identifier>
+              <identDesc kind="IdentEnum.VAR" type="int" index="4" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
                   <identifier> ball </identifier>
                   <symbol> . </symbol>
                   <identifier> getRight </identifier>
+                  <identDesc name="ball" kind="CLASS" declared="False"/>
+                  <identDesc name="getRight" kind="SUB" declared="False"/>
                   <symbol> ( </symbol>
                   <expressionList>
                   </expressionList>
@@ -1015,6 +1116,7 @@
               <expression>
                 <term>
                   <identifier> wall </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
                 </term>
                 <symbol> = </symbol>
                 <term>
@@ -1027,6 +1129,7 @@
                 <letStatement>
                   <keyword> let </keyword>
                   <identifier> exit </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="boolean" index="3" declared="False" />
                   <symbol> = </symbol>
                   <expression>
                     <term>
@@ -1034,10 +1137,12 @@
                       <expression>
                         <term>
                           <identifier> batLeft </identifier>
+                          <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="False" />
                         </term>
                         <symbol> > </symbol>
                         <term>
                           <identifier> ballRight </identifier>
+                          <identDesc kind="IdentEnum.VAR" type="int" index="4" declared="False" />
                         </term>
                       </expression>
                       <symbol> ) </symbol>
@@ -1048,10 +1153,12 @@
                       <expression>
                         <term>
                           <identifier> batRight </identifier>
+                          <identDesc kind="IdentEnum.VAR" type="int" index="2" declared="False" />
                         </term>
                         <symbol> < </symbol>
                         <term>
                           <identifier> ballLeft </identifier>
+                          <identDesc kind="IdentEnum.VAR" type="int" index="3" declared="False" />
                         </term>
                       </expression>
                       <symbol> ) </symbol>
@@ -1067,6 +1174,7 @@
                       <symbol> ~ </symbol>
                       <term>
                         <identifier> exit </identifier>
+                        <identDesc kind="IdentEnum.FIELD" type="boolean" index="3" declared="False" />
                       </term>
                     </term>
                   </expression>
@@ -1079,6 +1187,7 @@
                       <expression>
                         <term>
                           <identifier> ballRight </identifier>
+                          <identDesc kind="IdentEnum.VAR" type="int" index="4" declared="False" />
                         </term>
                         <symbol> < </symbol>
                         <term>
@@ -1086,6 +1195,7 @@
                           <expression>
                             <term>
                               <identifier> batLeft </identifier>
+                              <identDesc kind="IdentEnum.VAR" type="int" index="1" declared="False" />
                             </term>
                             <symbol> + </symbol>
                             <term>
@@ -1101,6 +1211,7 @@
                         <letStatement>
                           <keyword> let </keyword>
                           <identifier> bouncingDirection </identifier>
+                          <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="False" />
                           <symbol> = </symbol>
                           <expression>
                             <term>
@@ -1123,6 +1234,7 @@
                           <expression>
                             <term>
                               <identifier> ballLeft </identifier>
+                              <identDesc kind="IdentEnum.VAR" type="int" index="3" declared="False" />
                             </term>
                             <symbol> > </symbol>
                             <term>
@@ -1130,6 +1242,7 @@
                               <expression>
                                 <term>
                                   <identifier> batRight </identifier>
+                                  <identDesc kind="IdentEnum.VAR" type="int" index="2" declared="False" />
                                 </term>
                                 <symbol> - </symbol>
                                 <term>
@@ -1145,6 +1258,7 @@
                             <letStatement>
                               <keyword> let </keyword>
                               <identifier> bouncingDirection </identifier>
+                              <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="False" />
                               <symbol> = </symbol>
                               <expression>
                                 <term>
@@ -1162,10 +1276,12 @@
                     <letStatement>
                       <keyword> let </keyword>
                       <identifier> batWidth </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="int" index="6" declared="False" />
                       <symbol> = </symbol>
                       <expression>
                         <term>
                           <identifier> batWidth </identifier>
+                          <identDesc kind="IdentEnum.FIELD" type="int" index="6" declared="False" />
                         </term>
                         <symbol> - </symbol>
                         <term>
@@ -1179,11 +1295,14 @@
                       <identifier> bat </identifier>
                       <symbol> . </symbol>
                       <identifier> setWidth </identifier>
+                      <identDesc name="bat" kind="CLASS" declared="False"/>
+                      <identDesc name="setWidth" kind="SUB" declared="False"/>
                       <symbol> ( </symbol>
                       <expressionList>
                         <expression>
                           <term>
                             <identifier> batWidth </identifier>
+                            <identDesc kind="IdentEnum.FIELD" type="int" index="6" declared="False" />
                           </term>
                         </expression>
                       </expressionList>
@@ -1193,10 +1312,12 @@
                     <letStatement>
                       <keyword> let </keyword>
                       <identifier> score </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="int" index="4" declared="False" />
                       <symbol> = </symbol>
                       <expression>
                         <term>
                           <identifier> score </identifier>
+                          <identDesc kind="IdentEnum.FIELD" type="int" index="4" declared="False" />
                         </term>
                         <symbol> + </symbol>
                         <term>
@@ -1210,6 +1331,8 @@
                       <identifier> Output </identifier>
                       <symbol> . </symbol>
                       <identifier> moveCursor </identifier>
+                      <identDesc name="Output" kind="CLASS" declared="False"/>
+                      <identDesc name="moveCursor" kind="SUB" declared="False"/>
                       <symbol> ( </symbol>
                       <expressionList>
                         <expression>
@@ -1232,11 +1355,14 @@
                       <identifier> Output </identifier>
                       <symbol> . </symbol>
                       <identifier> printInt </identifier>
+                      <identDesc name="Output" kind="CLASS" declared="False"/>
+                      <identDesc name="printInt" kind="SUB" declared="False"/>
                       <symbol> ( </symbol>
                       <expressionList>
                         <expression>
                           <term>
                             <identifier> score </identifier>
+                            <identDesc kind="IdentEnum.FIELD" type="int" index="4" declared="False" />
                           </term>
                         </expression>
                       </expressionList>
@@ -1254,11 +1380,14 @@
               <identifier> ball </identifier>
               <symbol> . </symbol>
               <identifier> bounce </identifier>
+              <identDesc name="ball" kind="CLASS" declared="False"/>
+              <identDesc name="bounce" kind="SUB" declared="False"/>
               <symbol> ( </symbol>
               <expressionList>
                 <expression>
                   <term>
                     <identifier> bouncingDirection </identifier>
+                    <identDesc kind="IdentEnum.VAR" type="int" index="0" declared="False" />
                   </term>
                 </expression>
               </expressionList>

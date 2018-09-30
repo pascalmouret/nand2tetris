@@ -6,22 +6,27 @@
     <keyword> field </keyword>
     <keyword> int </keyword>
     <identifier> x </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="True" />
     <symbol> , </symbol>
     <identifier> y </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="True" />
     <symbol> ; </symbol>
   </classVarDec>
   <classVarDec>
     <keyword> field </keyword>
     <keyword> int </keyword>
     <identifier> width </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="True" />
     <symbol> , </symbol>
     <identifier> height </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="3" declared="True" />
     <symbol> ; </symbol>
   </classVarDec>
   <classVarDec>
     <keyword> field </keyword>
     <keyword> int </keyword>
     <identifier> direction </identifier>
+    <identDesc kind="IdentEnum.FIELD" type="int" index="4" declared="True" />
     <symbol> ; </symbol>
   </classVarDec>
   <subroutineDec>
@@ -32,15 +37,19 @@
     <parameterList>
       <keyword> int </keyword>
       <identifier> Ax </identifier>
+      <identDesc kind="IdentEnum.ARG" type="int" index="0" declared="True" />
       <symbol> , </symbol>
       <keyword> int </keyword>
       <identifier> Ay </identifier>
+      <identDesc kind="IdentEnum.ARG" type="int" index="1" declared="True" />
       <symbol> , </symbol>
       <keyword> int </keyword>
       <identifier> Awidth </identifier>
+      <identDesc kind="IdentEnum.ARG" type="int" index="2" declared="True" />
       <symbol> , </symbol>
       <keyword> int </keyword>
       <identifier> Aheight </identifier>
+      <identDesc kind="IdentEnum.ARG" type="int" index="3" declared="True" />
     </parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
@@ -49,10 +58,12 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> x </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> Ax </identifier>
+              <identDesc kind="IdentEnum.ARG" type="int" index="0" declared="False" />
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -60,10 +71,12 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> y </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> Ay </identifier>
+              <identDesc kind="IdentEnum.ARG" type="int" index="1" declared="False" />
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -71,10 +84,12 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> width </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> Awidth </identifier>
+              <identDesc kind="IdentEnum.ARG" type="int" index="2" declared="False" />
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -82,10 +97,12 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> height </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="3" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> Aheight </identifier>
+              <identDesc kind="IdentEnum.ARG" type="int" index="3" declared="False" />
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -93,6 +110,7 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> direction </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="4" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
@@ -104,6 +122,7 @@
         <doStatement>
           <keyword> do </keyword>
           <identifier> show </identifier>
+          <identDesc name="show" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
           </expressionList>
@@ -139,6 +158,8 @@
           <identifier> Memory </identifier>
           <symbol> . </symbol>
           <identifier> deAlloc </identifier>
+          <identDesc name="Memory" kind="CLASS" declared="False"/>
+          <identDesc name="deAlloc" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
             <expression>
@@ -174,6 +195,8 @@
           <identifier> Screen </identifier>
           <symbol> . </symbol>
           <identifier> setColor </identifier>
+          <identDesc name="Screen" kind="CLASS" declared="False"/>
+          <identDesc name="setColor" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
             <expression>
@@ -188,6 +211,7 @@
         <doStatement>
           <keyword> do </keyword>
           <identifier> draw </identifier>
+          <identDesc name="draw" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
           </expressionList>
@@ -218,6 +242,8 @@
           <identifier> Screen </identifier>
           <symbol> . </symbol>
           <identifier> setColor </identifier>
+          <identDesc name="Screen" kind="CLASS" declared="False"/>
+          <identDesc name="setColor" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
             <expression>
@@ -232,6 +258,7 @@
         <doStatement>
           <keyword> do </keyword>
           <identifier> draw </identifier>
+          <identDesc name="draw" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
           </expressionList>
@@ -262,37 +289,45 @@
           <identifier> Screen </identifier>
           <symbol> . </symbol>
           <identifier> drawRectangle </identifier>
+          <identDesc name="Screen" kind="CLASS" declared="False"/>
+          <identDesc name="drawRectangle" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
             <expression>
               <term>
                 <identifier> x </identifier>
+                <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
               </term>
             </expression>
             <symbol> , </symbol>
             <expression>
               <term>
                 <identifier> y </identifier>
+                <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
               </term>
             </expression>
             <symbol> , </symbol>
             <expression>
               <term>
                 <identifier> x </identifier>
+                <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
               </term>
               <symbol> + </symbol>
               <term>
                 <identifier> width </identifier>
+                <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
               </term>
             </expression>
             <symbol> , </symbol>
             <expression>
               <term>
                 <identifier> y </identifier>
+                <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
               </term>
               <symbol> + </symbol>
               <term>
                 <identifier> height </identifier>
+                <identDesc kind="IdentEnum.FIELD" type="int" index="3" declared="False" />
               </term>
             </expression>
           </expressionList>
@@ -315,6 +350,7 @@
     <parameterList>
       <keyword> int </keyword>
       <identifier> Adirection </identifier>
+      <identDesc kind="IdentEnum.ARG" type="int" index="0" declared="True" />
     </parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
@@ -323,10 +359,12 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> direction </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="4" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> Adirection </identifier>
+              <identDesc kind="IdentEnum.ARG" type="int" index="0" declared="False" />
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -355,6 +393,7 @@
           <expression>
             <term>
               <identifier> x </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -379,10 +418,12 @@
           <expression>
             <term>
               <identifier> x </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
             </term>
             <symbol> + </symbol>
             <term>
               <identifier> width </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -399,6 +440,7 @@
     <parameterList>
       <keyword> int </keyword>
       <identifier> Awidth </identifier>
+      <identDesc kind="IdentEnum.ARG" type="int" index="0" declared="True" />
     </parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
@@ -407,6 +449,7 @@
         <doStatement>
           <keyword> do </keyword>
           <identifier> hide </identifier>
+          <identDesc name="hide" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
           </expressionList>
@@ -416,10 +459,12 @@
         <letStatement>
           <keyword> let </keyword>
           <identifier> width </identifier>
+          <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
           <symbol> = </symbol>
           <expression>
             <term>
               <identifier> Awidth </identifier>
+              <identDesc kind="IdentEnum.ARG" type="int" index="0" declared="False" />
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -427,6 +472,7 @@
         <doStatement>
           <keyword> do </keyword>
           <identifier> show </identifier>
+          <identDesc name="show" kind="SUB" declared="False"/>
           <symbol> ( </symbol>
           <expressionList>
           </expressionList>
@@ -458,6 +504,7 @@
           <expression>
             <term>
               <identifier> direction </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="4" declared="False" />
             </term>
             <symbol> = </symbol>
             <term>
@@ -470,10 +517,12 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> x </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
                   <identifier> x </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                 </term>
                 <symbol> - </symbol>
                 <term>
@@ -488,6 +537,7 @@
               <expression>
                 <term>
                   <identifier> x </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                 </term>
                 <symbol> < </symbol>
                 <term>
@@ -500,6 +550,7 @@
                 <letStatement>
                   <keyword> let </keyword>
                   <identifier> x </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                   <symbol> = </symbol>
                   <expression>
                     <term>
@@ -516,6 +567,8 @@
               <identifier> Screen </identifier>
               <symbol> . </symbol>
               <identifier> setColor </identifier>
+              <identDesc name="Screen" kind="CLASS" declared="False"/>
+              <identDesc name="setColor" kind="SUB" declared="False"/>
               <symbol> ( </symbol>
               <expressionList>
                 <expression>
@@ -532,6 +585,8 @@
               <identifier> Screen </identifier>
               <symbol> . </symbol>
               <identifier> drawRectangle </identifier>
+              <identDesc name="Screen" kind="CLASS" declared="False"/>
+              <identDesc name="drawRectangle" kind="SUB" declared="False"/>
               <symbol> ( </symbol>
               <expressionList>
                 <expression>
@@ -540,10 +595,12 @@
                     <expression>
                       <term>
                         <identifier> x </identifier>
+                        <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                       </term>
                       <symbol> + </symbol>
                       <term>
                         <identifier> width </identifier>
+                        <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
                       </term>
                     </expression>
                     <symbol> ) </symbol>
@@ -557,6 +614,7 @@
                 <expression>
                   <term>
                     <identifier> y </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                   </term>
                 </expression>
                 <symbol> , </symbol>
@@ -566,10 +624,12 @@
                     <expression>
                       <term>
                         <identifier> x </identifier>
+                        <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                       </term>
                       <symbol> + </symbol>
                       <term>
                         <identifier> width </identifier>
+                        <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
                       </term>
                     </expression>
                     <symbol> ) </symbol>
@@ -583,10 +643,12 @@
                 <expression>
                   <term>
                     <identifier> y </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                   </term>
                   <symbol> + </symbol>
                   <term>
                     <identifier> height </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="3" declared="False" />
                   </term>
                 </expression>
               </expressionList>
@@ -598,6 +660,8 @@
               <identifier> Screen </identifier>
               <symbol> . </symbol>
               <identifier> setColor </identifier>
+              <identDesc name="Screen" kind="CLASS" declared="False"/>
+              <identDesc name="setColor" kind="SUB" declared="False"/>
               <symbol> ( </symbol>
               <expressionList>
                 <expression>
@@ -614,23 +678,28 @@
               <identifier> Screen </identifier>
               <symbol> . </symbol>
               <identifier> drawRectangle </identifier>
+              <identDesc name="Screen" kind="CLASS" declared="False"/>
+              <identDesc name="drawRectangle" kind="SUB" declared="False"/>
               <symbol> ( </symbol>
               <expressionList>
                 <expression>
                   <term>
                     <identifier> x </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
                     <identifier> y </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
                     <identifier> x </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                   </term>
                   <symbol> + </symbol>
                   <term>
@@ -641,10 +710,12 @@
                 <expression>
                   <term>
                     <identifier> y </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                   </term>
                   <symbol> + </symbol>
                   <term>
                     <identifier> height </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="3" declared="False" />
                   </term>
                 </expression>
               </expressionList>
@@ -659,10 +730,12 @@
             <letStatement>
               <keyword> let </keyword>
               <identifier> x </identifier>
+              <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
               <symbol> = </symbol>
               <expression>
                 <term>
                   <identifier> x </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                 </term>
                 <symbol> + </symbol>
                 <term>
@@ -680,10 +753,12 @@
                   <expression>
                     <term>
                       <identifier> x </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                     </term>
                     <symbol> + </symbol>
                     <term>
                       <identifier> width </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
                     </term>
                   </expression>
                   <symbol> ) </symbol>
@@ -699,6 +774,7 @@
                 <letStatement>
                   <keyword> let </keyword>
                   <identifier> x </identifier>
+                  <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                   <symbol> = </symbol>
                   <expression>
                     <term>
@@ -707,6 +783,7 @@
                     <symbol> - </symbol>
                     <term>
                       <identifier> width </identifier>
+                      <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
                     </term>
                   </expression>
                   <symbol> ; </symbol>
@@ -719,6 +796,8 @@
               <identifier> Screen </identifier>
               <symbol> . </symbol>
               <identifier> setColor </identifier>
+              <identDesc name="Screen" kind="CLASS" declared="False"/>
+              <identDesc name="setColor" kind="SUB" declared="False"/>
               <symbol> ( </symbol>
               <expressionList>
                 <expression>
@@ -735,11 +814,14 @@
               <identifier> Screen </identifier>
               <symbol> . </symbol>
               <identifier> drawRectangle </identifier>
+              <identDesc name="Screen" kind="CLASS" declared="False"/>
+              <identDesc name="drawRectangle" kind="SUB" declared="False"/>
               <symbol> ( </symbol>
               <expressionList>
                 <expression>
                   <term>
                     <identifier> x </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                   </term>
                   <symbol> - </symbol>
                   <term>
@@ -750,12 +832,14 @@
                 <expression>
                   <term>
                     <identifier> y </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
                     <identifier> x </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                   </term>
                   <symbol> - </symbol>
                   <term>
@@ -766,10 +850,12 @@
                 <expression>
                   <term>
                     <identifier> y </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                   </term>
                   <symbol> + </symbol>
                   <term>
                     <identifier> height </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="3" declared="False" />
                   </term>
                 </expression>
               </expressionList>
@@ -781,6 +867,8 @@
               <identifier> Screen </identifier>
               <symbol> . </symbol>
               <identifier> setColor </identifier>
+              <identDesc name="Screen" kind="CLASS" declared="False"/>
+              <identDesc name="setColor" kind="SUB" declared="False"/>
               <symbol> ( </symbol>
               <expressionList>
                 <expression>
@@ -797,6 +885,8 @@
               <identifier> Screen </identifier>
               <symbol> . </symbol>
               <identifier> drawRectangle </identifier>
+              <identDesc name="Screen" kind="CLASS" declared="False"/>
+              <identDesc name="drawRectangle" kind="SUB" declared="False"/>
               <symbol> ( </symbol>
               <expressionList>
                 <expression>
@@ -805,10 +895,12 @@
                     <expression>
                       <term>
                         <identifier> x </identifier>
+                        <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                       </term>
                       <symbol> + </symbol>
                       <term>
                         <identifier> width </identifier>
+                        <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
                       </term>
                     </expression>
                     <symbol> ) </symbol>
@@ -822,26 +914,31 @@
                 <expression>
                   <term>
                     <identifier> y </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
                     <identifier> x </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="0" declared="False" />
                   </term>
                   <symbol> + </symbol>
                   <term>
                     <identifier> width </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="2" declared="False" />
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
                     <identifier> y </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="1" declared="False" />
                   </term>
                   <symbol> + </symbol>
                   <term>
                     <identifier> height </identifier>
+                    <identDesc kind="IdentEnum.FIELD" type="int" index="3" declared="False" />
                   </term>
                 </expression>
               </expressionList>

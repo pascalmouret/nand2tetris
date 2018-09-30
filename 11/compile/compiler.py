@@ -31,6 +31,7 @@ class Compiler:
         self.tokenizer = tokenizer
     
     def write_to(self, outf: Path) -> None:
+        self.symbol_table = SymbolTable()
         self.outf = open(outf, 'w')
         self.depth = 0
         self.tokens = iter(self.tokenizer)
@@ -95,6 +96,15 @@ class Compiler:
             self.current.token
         ))
 
+    def find_in_scope(self, name: str) -> Optional[Symbol]:
+        return self.symbol_table.find(name)
+
+    def get_in_scope(self, name: str) -> Symbol:
+        symbol = self.find_in_scope(name)
+        if not symbol:
+            raise CompilerError(self.current.line, '\'{}\' not in scope.'.format(name))
+        return symbol
+
     def compile_class(self) -> None:
         self.enter_block('class')
 
@@ -114,26 +124,33 @@ class Compiler:
 
     def compile_type(self, function: bool = False) -> str:
         types = self.FUNCTION_TYPES if function else self.VAR_TYPES
-        return self.write_if(types)
+        return self.write_if(types).token
             
     def compile_class_var_dec(self) -> None:
         self.enter_block('classVarDec')
+        if self.current_is(KeywordEnum.FIELD):
+            var_kind = IdentEnum.FIELD
+        if self.current_is(KeywordEnum.STATIC):
+            var_kind = IdentEnum.STATIC
         self.write_if(self.CLASS_VAR_DEC)
-        self.compile_var_list()
+        self.compile_var_list(var_kind)
         self.exit_block('classVarDec')
 
-    def compile_var_list(self) -> Token:
-        self.compile_type()
+    def compile_var_list(self, var_kind: IdentEnum) -> Token:
+        tpe = self.compile_type()
 
-        self.write_if(TokenEnum.IDENTIFIER)
+        name = self.write_if(TokenEnum.IDENTIFIER).token
+        self.write(self.symbol_table.register(name, tpe, var_kind).to_xml(True))
         while not self.current_is(';'):
             self.write_if(',')
-            self.write_if(TokenEnum.IDENTIFIER)
+            name = self.write_if(TokenEnum.IDENTIFIER).token
+            self.write(self.symbol_table.register(name, tpe, var_kind).to_xml(True))
         self.write_if(';')
 
     def compile_subroutine_dec(self) -> None:
         self.enter_block('subroutineDec')
         
+        self.symbol_table.reset_function_scope()
         self.write_if(self.SUBROUTINE_DEC)
         self.compile_type(True)
         self.write_if(TokenEnum.IDENTIFIER)
@@ -149,8 +166,9 @@ class Compiler:
         while not self.current_is(')'):
             if self.current_is(','):
                 self.write_if(',')
-            self.compile_type()
-            self.write_if(TokenEnum.IDENTIFIER).token,
+            tpe = self.compile_type()
+            name = self.write_if(TokenEnum.IDENTIFIER).token
+            self.write(self.symbol_table.register(name, tpe, IdentEnum.ARG).to_xml(True))
 
         self.exit_block('parameterList')
         self.write_if(')')
@@ -170,7 +188,7 @@ class Compiler:
         self.enter_block('varDec')
         
         self.write_if(KeywordEnum.VAR)
-        self.compile_var_list()
+        self.compile_var_list(IdentEnum.VAR)
         
         self.exit_block('varDec')
 
@@ -204,7 +222,8 @@ class Compiler:
         self.enter_block('letStatement')
         
         self.write_if(KeywordEnum.LET)
-        self.write_if(TokenEnum.IDENTIFIER)
+        name = self.write_if(TokenEnum.IDENTIFIER).token
+        self.write(self.get_in_scope(name).to_xml())
         if self.current_is('['):
             self.write_if('[')
             self.compile_expression()
@@ -266,16 +285,26 @@ class Compiler:
 
         self.exit_block('returnStatement')
 
-    def compile_subroutine_call(self, top: Optional[Token] = None) -> None:
+    def compile_subroutine_call(self, last: Optional[Token] = None) -> None:
         # because we need to look t+2 ahead when doing expression, we might
         # have to pass in the identifier manually
-        if top:
-            self.write(top.to_xml())
+        routine_name = None
+        class_name = None
+        
+        if last:
+            routine_name = last.token
+            self.write(last.to_xml())
         else:
-            self.write_if(TokenEnum.IDENTIFIER)
-        while self.current_is('.'):
+            routine_name = self.write_if(TokenEnum.IDENTIFIER).token
+        if self.current_is('.'):
             self.write_if('.')
-            self.write_if(TokenEnum.IDENTIFIER)
+            class_name = routine_name
+            routine_name = self.write_if(TokenEnum.IDENTIFIER).token
+
+        if class_name:
+            self.write('<identDesc name="{}" kind="CLASS" declared="False"/>'.format(class_name))
+        self.write('<identDesc name="{}" kind="SUB" declared="False"/>'.format(routine_name))
+
         self.write_if('(')
         self.compile_expression_list()
         self.write_if(')')
@@ -312,17 +341,19 @@ class Compiler:
             self.write_if(self.UNARY_OP)
             self.compile_term()
         elif self.current_is(TokenEnum.IDENTIFIER):
-            top = self.current
+            last = self.current
             self.next()
             if self.current_is(self.SUB_CALL):
-                self.compile_subroutine_call(top)
+                self.compile_subroutine_call(last)
             elif self.current_is('['):
-                self.write(top.to_xml())
+                self.write(last.to_xml())
+                self.write(self.get_in_scope(last.token).to_xml())
                 self.write_if('[')
                 self.compile_expression()
                 self.write_if(']')
             else:
-                self.write(top.to_xml())
+                self.write(last.to_xml())
+                self.write(self.get_in_scope(last.token).to_xml())
         elif self.current_is(self.EXPR_CONST):
             self.write_if(self.EXPR_CONST)
         else:
