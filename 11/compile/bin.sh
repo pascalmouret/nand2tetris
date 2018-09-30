@@ -1,0 +1,4 @@
+#!/bin/bash
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+FILEPATH="$(cd "$(dirname "$1")"; pwd)/$(basename "$1")"
+(cd $SCRIPTPATH/.. && python3 compile/main.py $FILEPATH)
