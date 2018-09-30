@@ -3,10 +3,11 @@ from pathlib import Path
 from typing import Iterator
 
 from compile.token import *
+from compile.syntax import KEYWORD_CONST_MAP
 
 
 class Tokenizer:
-    KEYWORDS = set(CONST_MAP.keys())
+    KEYWORDS = set(KEYWORD_CONST_MAP.keys())
     WHITESPACE = set(' \n\t')
     SYMBOLS = set('{}()[].,;+-*/&|<>=~')
     STOPERS = WHITESPACE | SYMBOLS

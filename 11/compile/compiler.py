@@ -1,9 +1,12 @@
 from typing import Iterator, Type, List, Union, Set, Optional
 from pathlib import Path
 from textwrap import indent
+from enum import Enum
 
-from compile.tokenizer import Tokenizer, Token
+from compile.symbol_table import SymbolTable
+from compile.tokenizer import Tokenizer
 from compile.token import *
+from compile.syntax import *
 
 
 class CompilerError(Exception):
@@ -12,21 +15,21 @@ class CompilerError(Exception):
 
 
 class Compiler:
-    CLASS_VAR_DEC = set([STATIC, FIELD])
-    SUBROUTINE_DEC = set([CONSTRUCTOR, FUNCTION, METHOD])
-    VAR_TYPES = set([INT, CHAR, BOOLEAN, IDENTIFIER])
-    FUNCTION_TYPES = set([VOID]) | VAR_TYPES
-    STATEMENTS = set([LET, IF, WHILE, DO, RETURN])
-    UNARY_OP = set('-~')
+    CLASS_VAR_DEC = {KeywordEnum.STATIC, KeywordEnum.FIELD}
+    SUBROUTINE_DEC = {KeywordEnum.CONSTRUCTOR, KeywordEnum.FUNCTION, KeywordEnum.METHOD}
+    VAR_TYPES = {KeywordEnum.INT, KeywordEnum.CHAR, KeywordEnum.BOOLEAN, TokenEnum.IDENTIFIER}
+    FUNCTION_TYPES = {KeywordEnum.VOID} | VAR_TYPES
+    STATEMENTS = {KeywordEnum.LET, KeywordEnum.IF, KeywordEnum.WHILE, KeywordEnum.DO, KeywordEnum.RETURN}
     TERM_OPEN = set('(')
+    UNARY_OP = set('-~')
     OP = set('+-*/&|<>=--')
-    EXPR_CONST = set([TRUE, FALSE, NULL, THIS, INT_CONST, STRING_CONST])
-    TERM = set([IDENTIFIER]) | UNARY_OP | TERM_OPEN | EXPR_CONST
-    SUB_CALL = set(['(', '.'])
+    EXPR_CONST = {KeywordEnum.TRUE, KeywordEnum.FALSE, KeywordEnum.NULL, KeywordEnum.THIS, TokenEnum.INT_CONST, TokenEnum.STRING_CONST}
+    TERM = {TokenEnum.IDENTIFIER} | UNARY_OP | TERM_OPEN | EXPR_CONST
+    SUB_CALL = set('(.')
 
     def __init__(self, tokenizer: Tokenizer) -> None:
         self.tokenizer = tokenizer
-	
+    
     def write_to(self, outf: Path) -> None:
         self.outf = open(outf, 'w')
         self.depth = 0
@@ -60,99 +63,113 @@ class Compiler:
             self.next()
         self.outf.write(indent(line, ''.join(['  ' for i in range(0, self.depth)])) + '\n')
 
-    def verify_is(self, things: Union[int, str, Set[Union[int, str]]]) -> None:
-        def to_string(thing: Union[str, int]) -> str:
-            if isinstance(thing, int):
-                return CONST_NAME_MAP[const]
-            else:
-                return thing
+    def current_is(self, options: Union[
+        TokenEnum, KeywordEnum, str, 
+        Set[Union[TokenEnum, KeywordEnum, str]]
+    ]) -> bool:
+        if not isinstance(options, set):
+            options = {options}
+        if self.current.kind in options:
+            return True
+        elif self.current.kind == TokenEnum.KEYWORD:
+            return self.current.enum in options
+        elif self.current.kind == TokenEnum.SYMBOL:
+            return self.current.token in options
 
-        if not isinstance(things, set):
-            things = [things]
-            
-        if self.current in things or self.current.token in things:
+    def write_if(self, options: Union[
+        TokenEnum, KeywordEnum, str, 
+        Set[Union[TokenEnum, KeywordEnum, str]]
+    ]) -> Token:
+        if self.current_is(options):
+            token = self.current
             self.write(self.current)
+            return token
         else:
-            raise CompilerError(self.current.line, 'Expected {}, got {} instead.'.format(
-                '|'.join([to_string(thing) for thing in things]),
-                self.current.token
-            ))
+            if not isinstance(options, set):
+                options = {options}
+            self.raise_unexpected([o.name if isinstance(o, Enum) else o for o in options])
+
+    def raise_unexpected(self, expected: Set[str]) -> None:
+        raise CompilerError(self.current.line, 'Expected {}, got {} instead.'.format(
+            '|'.join(expected),
+            self.current.token
+        ))
 
     def compile_class(self) -> None:
         self.enter_block('class')
 
-        self.verify_is(CLASS)
-        self.verify_is(IDENTIFIER)
-        self.verify_is('{')
+        self.write_if(KeywordEnum.CLASS)
+        self.write_if(TokenEnum.IDENTIFIER)
+        self.write_if('{')
 
-        while self.current != '}' and self.current not in self.SUBROUTINE_DEC:
+        while not self.current_is(self.SUBROUTINE_DEC | {'}'}):
             self.compile_class_var_dec()
-        while self.current != '}':
+        while not self.current_is('}'):
             self.compile_subroutine_dec()
          
         # can't iterate, will raise stop iteration
-        if self.current == '}':
+        if self.current_is('}'):
             self.write(self.current.to_xml())
         self.exit_block('class')
 
-    def compile_type(self, function: bool = False) -> None:
+    def compile_type(self, function: bool = False) -> str:
         types = self.FUNCTION_TYPES if function else self.VAR_TYPES
-        self.verify_is(types)
+        return self.write_if(types)
             
     def compile_class_var_dec(self) -> None:
         self.enter_block('classVarDec')
-        self.verify_is(self.CLASS_VAR_DEC)
+        self.write_if(self.CLASS_VAR_DEC)
         self.compile_var_list()
         self.exit_block('classVarDec')
 
     def compile_var_list(self) -> Token:
         self.compile_type()
 
-        while self.current != ';':
-            if self.current == ',':
-                self.verify_is(',')
-            self.verify_is(IDENTIFIER)
-        self.verify_is(';')
+        self.write_if(TokenEnum.IDENTIFIER)
+        while not self.current_is(';'):
+            self.write_if(',')
+            self.write_if(TokenEnum.IDENTIFIER)
+        self.write_if(';')
 
     def compile_subroutine_dec(self) -> None:
         self.enter_block('subroutineDec')
         
-        self.verify_is(self.SUBROUTINE_DEC)
+        self.write_if(self.SUBROUTINE_DEC)
         self.compile_type(True)
-        self.verify_is(IDENTIFIER)
+        self.write_if(TokenEnum.IDENTIFIER)
         self.compile_parameter_list()
         self.compile_subroutine_body()
 
         self.exit_block('subroutineDec')
 
     def compile_parameter_list(self) -> None:
-        self.verify_is('(')
+        self.write_if('(')
         self.enter_block('parameterList')
 
-        while self.current != ')':
-            if self.current == ',':
-                self.verify_is(',')
+        while not self.current_is(')'):
+            if self.current_is(','):
+                self.write_if(',')
             self.compile_type()
-            self.verify_is(IDENTIFIER)
+            self.write_if(TokenEnum.IDENTIFIER).token,
 
         self.exit_block('parameterList')
-        self.verify_is(')')
+        self.write_if(')')
 
     def compile_subroutine_body(self) -> None:
         self.enter_block('subroutineBody')
-        self.verify_is('{')
+        self.write_if('{')
         
-        while self.current != '}' and self.current not in self.STATEMENTS:
+        while not self.current_is({'}'} | self.STATEMENTS):
             self.compile_var_dec()
         self.compile_statements()
         
-        self.verify_is('}')
+        self.write_if('}')
         self.exit_block('subroutineBody')
 
     def compile_var_dec(self) -> None:
         self.enter_block('varDec')
         
-        self.verify_is(VAR)
+        self.write_if(KeywordEnum.VAR)
         self.compile_var_list()
         
         self.exit_block('varDec')
@@ -161,21 +178,21 @@ class Compiler:
         self.enter_block('statements')
         
         self.compile_statement()
-        while self.current in self.STATEMENTS:
+        while self.current_is(self.STATEMENTS):
             self.compile_statement()
 
         self.exit_block('statements')
 
     def compile_statement(self) -> None:
-        if self.current == LET:
+        if self.current_is(KeywordEnum.LET):
             self.compile_let()
-        elif self.current == IF:
+        elif self.current_is(KeywordEnum.IF):
             self.compile_if()
-        elif self.current == WHILE:
+        elif self.current_is(KeywordEnum.WHILE):
             self.compile_while()
-        elif self.current == DO:
+        elif self.current_is(KeywordEnum.DO):
             self.compile_do()
-        elif self.current == RETURN:
+        elif self.current_is(KeywordEnum.RETURN):
             self.compile_return()
         else:
             raise CompilerError(
@@ -186,66 +203,66 @@ class Compiler:
     def compile_let(self) -> None:
         self.enter_block('letStatement')
         
-        self.verify_is(LET)
-        self.verify_is(IDENTIFIER)
-        if self.current == '[':
-            self.verify_is('[')
+        self.write_if(KeywordEnum.LET)
+        self.write_if(TokenEnum.IDENTIFIER)
+        if self.current_is('['):
+            self.write_if('[')
             self.compile_expression()
-            self.verify_is(']')
-        self.verify_is('=')
+            self.write_if(']')
+        self.write_if('=')
         self.compile_expression()
-        self.verify_is(';')
+        self.write_if(';')
 
         self.exit_block('letStatement')
 
     def compile_if(self) -> None:
         self.enter_block('ifStatement')
 
-        self.verify_is(IF)
-        self.verify_is('(')
+        self.write_if(KeywordEnum.IF)
+        self.write_if('(')
         self.compile_expression()
-        self.verify_is(')')
-        self.verify_is('{')
+        self.write_if(')')
+        self.write_if('{')
         self.compile_statements()
-        self.verify_is('}')
+        self.write_if('}')
 
-        if self.current == ELSE:
-            self.verify_is(ELSE)
-            self.verify_is('{')
+        if self.current_is(KeywordEnum.ELSE):
+            self.write_if(KeywordEnum.ELSE)
+            self.write_if('{')
             self.compile_statements()
-            self.verify_is('}')
+            self.write_if('}')
 
         self.exit_block('ifStatement')
 
     def compile_while(self) -> None:
         self.enter_block('whileStatement')
         
-        self.verify_is(WHILE)
-        self.verify_is('(')
+        self.write_if(KeywordEnum.WHILE)
+        self.write_if('(')
         self.compile_expression()
-        self.verify_is(')')
-        self.verify_is('{')
+        self.write_if(')')
+        self.write_if('{')
         self.compile_statements()
-        self.verify_is('}')
+        self.write_if('}')
 
         self.exit_block('whileStatement')
 
     def compile_do(self) -> None:
         self.enter_block('doStatement')
 
-        self.verify_is(DO)
+        self.write_if(KeywordEnum.DO)
         self.compile_subroutine_call()
-        self.verify_is(';')
+        self.write_if(';')
 
         self.exit_block('doStatement')
 
     def compile_return(self) -> None:
         self.enter_block('returnStatement')
 
-        self.verify_is(RETURN)
-        if self.current in self.TERM:
+        self.write_if(KeywordEnum.RETURN)
+        if self.current_is(self.TERM):
             self.compile_expression()
-        self.verify_is(';')
+        self.write_if(';')
 
         self.exit_block('returnStatement')
 
@@ -255,21 +272,21 @@ class Compiler:
         if top:
             self.write(top.to_xml())
         else:
-            self.verify_is(IDENTIFIER)
-        while self.current == '.':
-            self.verify_is('.')
-            self.verify_is(IDENTIFIER)
-        self.verify_is('(')
+            self.write_if(TokenEnum.IDENTIFIER)
+        while self.current_is('.'):
+            self.write_if('.')
+            self.write_if(TokenEnum.IDENTIFIER)
+        self.write_if('(')
         self.compile_expression_list()
-        self.verify_is(')')
+        self.write_if(')')
 
     def compile_expression_list(self) -> None:
         self.enter_block('expressionList')
 
-        if self.current in self.TERM or self.current == '(':
+        if self.current_is(self.TERM | {'('}):
             self.compile_expression()
-        while self.current == ',':
-            self.verify_is(',')
+        while self.current_is(','):
+            self.write_if(',')
             self.compile_expression()
 
         self.exit_block('expressionList')
@@ -278,8 +295,8 @@ class Compiler:
         self.enter_block('expression')
 
         self.compile_term()
-        while self.current.token in self.OP:
-            self.verify_is(self.OP)
+        while self.current_is(self.OP):
+            self.write_if(self.OP)
             self.compile_term()
 
         self.exit_block('expression')
@@ -287,27 +304,27 @@ class Compiler:
     def compile_term(self) -> None:
         self.enter_block('term')
         
-        if self.current == '(':
-            self.verify_is('(')
+        if self.current_is('('):
+            self.write_if('(')
             self.compile_expression()
-            self.verify_is(')')
-        elif self.current.token in self.UNARY_OP:
-            self.verify_is(self.UNARY_OP)
+            self.write_if(')')
+        elif self.current_is(self.UNARY_OP):
+            self.write_if(self.UNARY_OP)
             self.compile_term()
-        elif self.current == IDENTIFIER:
+        elif self.current_is(TokenEnum.IDENTIFIER):
             top = self.current
             self.next()
-            if self.current.token in self.SUB_CALL:
+            if self.current_is(self.SUB_CALL):
                 self.compile_subroutine_call(top)
-            elif self.current.token == '[':
+            elif self.current_is('['):
                 self.write(top.to_xml())
-                self.verify_is('[')
+                self.write_if('[')
                 self.compile_expression()
-                self.verify_is(']')
+                self.write_if(']')
             else:
                 self.write(top.to_xml())
-        elif self.current in self.EXPR_CONST:
-            self.verify_is(self.EXPR_CONST)
+        elif self.current_is(self.EXPR_CONST):
+            self.write_if(self.EXPR_CONST)
         else:
             raise CompilerError(
                 self.current.line,
