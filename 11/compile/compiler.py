@@ -77,6 +77,19 @@ class Compiler:
         elif self.current.kind == TokenEnum.SYMBOL:
             return self.current.token in options
 
+    def discard_if(self, options: Union[
+        TokenEnum, KeywordEnum, str, 
+        Set[Union[TokenEnum, KeywordEnum, str]]
+    ]) -> Token:
+        if self.current_is(options):
+            token = self.current
+            self.next()
+            return token
+        else:
+            if not isinstance(options, set):
+                options = {options}
+            self.raise_unexpected([o.name if isinstance(o, Enum) else o for o in options])
+
     def write_if(self, options: Union[
         TokenEnum, KeywordEnum, str, 
         Set[Union[TokenEnum, KeywordEnum, str]]

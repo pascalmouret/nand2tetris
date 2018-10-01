@@ -27,7 +27,7 @@ def compile(path: Path) -> None:
     print('\033[92mCompilation done.')
 
 def compile_file(path: Path):
-    out_path = path.parent / path.parts[-1].replace('.jack', '_my.xml')
+    out_path = path.parent / path.parts[-1].replace('.jack', '.vm')
     tokenizer = Tokenizer(path)
     compiler = Compiler(tokenizer).write_to(out_path)
 
