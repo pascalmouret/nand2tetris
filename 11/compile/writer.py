@@ -93,10 +93,10 @@ class VMWriter:
         self._write('goto-if ' + label)
 
     def w_call(self, name: str, args: int) -> None:
-        self._write('call {} {}'.format(name, args))
+        self._write('call {} {}'.format(name, args))
 
     def w_function(self, name: str, args: int) -> None:
-        self._write('function {} {}'.format(label, args))
+        self._write('function {} {}'.format(name, args))
 
     def w_return(self) -> None:
         self._write('return')
