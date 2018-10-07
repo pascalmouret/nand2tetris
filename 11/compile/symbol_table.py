@@ -48,6 +48,9 @@ class SymbolTable:
         else:
             return None
 
+    def count_of(self, kind: IdentEnum) -> int:
+        return self._counts[kind]
+
     def _register_in_scope(
         self, 
         name: str,

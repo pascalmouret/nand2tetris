@@ -17,7 +17,7 @@ class Tokenizer:
 
     def __iter__(self) -> Iterator[Token]:
         self.file_handle = open(self.file)
-        self.line_count = 0
+        self.line_count = 1
         self.char_iter = itertools.chain.from_iterable(self.file_handle)
         self.current = None
         self.next = self.char_iter.__next__()

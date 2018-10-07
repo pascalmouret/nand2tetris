@@ -37,6 +37,7 @@ class Compiler:
         self.class_name = None
         self.symbol_table = SymbolTable()
         self.label_count = 0
+
         self.writer = VMWriter(outf)
         self.outf = open(outf, 'w')
         self.depth = 0
@@ -139,6 +140,8 @@ class Compiler:
         symbol = self.get_in_scope(name)
         if symbol.kind == IdentEnum.FIELD:
             self.writer.pop_this(symbol.index)
+        elif symbol.kind == IdentEnum.STATIC:
+            self.writer.pop_static(symbol.index)
         elif symbol.kind == IdentEnum.ARG:
             self.writer.pop_arg(symbol.index)
         else:
@@ -164,32 +167,27 @@ class Compiler:
 
     def compile_type(self, function: bool = False) -> str:
         types = self.FUNCTION_TYPES if function else self.VAR_TYPES
-        return self.write_if(types).token
+        return self.discard_if(types).token
             
     def compile_class_var_dec(self) -> None:
-        self.enter_block('classVarDec')
         if self.current_is(KeywordEnum.FIELD):
             var_kind = IdentEnum.FIELD
         if self.current_is(KeywordEnum.STATIC):
             var_kind = IdentEnum.STATIC
-        self.write_if(self.CLASS_VAR_DEC)
+        self.discard_if(self.CLASS_VAR_DEC)
         self.compile_var_list(var_kind)
-        self.exit_block('classVarDec')
 
-    def compile_var_list(self, var_kind: IdentEnum) -> int:
+    def compile_var_list(self, var_kind: IdentEnum) -> None:
         tpe = self.compile_type()
 
         name = self.discard_if(TokenEnum.IDENTIFIER).token
         self.symbol_table.register(name, tpe, var_kind)
-        count = 1
         while not self.current_is(';'):
             self.next()
             name = self.discard_if(TokenEnum.IDENTIFIER).token
             self.symbol_table.register(name, tpe, var_kind)
-            count += 1
             
         self.discard_if(';')
-        return count
 
     def compile_subroutine_dec(self) -> None:
         self.symbol_table.reset_function_scope()
@@ -197,21 +195,42 @@ class Compiler:
         sub_kind = self.discard_if(self.SUBROUTINE_DEC)
         ret_kind = self.compile_type(True)
         sub_name = self.discard_if(TokenEnum.IDENTIFIER).token
+
+        if sub_kind.enum == KeywordEnum.METHOD:
+            self.symbol_table.register('this', self.class_name, IdentEnum.ARG)
+
         self.compile_parameter_list()
         self.discard_if('{')
 
-        local_count = 0
         while not self.current_is({'}'} | self.STATEMENTS):
-            local_count += self.compile_var_dec()
+            self.compile_var_dec()
 
         if sub_kind.enum == KeywordEnum.FUNCTION:
-            self.writer.w_function(
-                '{}.{}'.format(self.class_name, sub_name), 
-                local_count
-            )
+            self.compile_function_setup(sub_name)
+        elif sub_kind.enum == KeywordEnum.METHOD:
+            self.compile_method_setup(sub_name)
+        elif sub_kind.enum == KeywordEnum.CONSTRUCTOR:
+            self.compile_constructor_setup(sub_name)
         
         self.compile_statements()
         self.discard_if('}')
+
+    def compile_function_setup(self, name: str) -> None:
+        self.writer.w_function(
+            '{}.{}'.format(self.class_name, name), 
+            self.symbol_table.count_of(IdentEnum.VAR)
+        )
+
+    def compile_method_setup(self, name: str) -> None:
+        self.compile_function_setup(name)
+        self.push_var('this')
+        self.writer.pop_pointer(0)
+
+    def compile_constructor_setup(self, name: str) -> None:
+        self.compile_function_setup(name)
+        self.writer.push_const(self.symbol_table.count_of(IdentEnum.FIELD))
+        self.writer.w_call('Memory.alloc', 1)
+        self.writer.pop_pointer(0)
 
     def compile_parameter_list(self) -> None:
         self.discard_if('(')
@@ -225,9 +244,9 @@ class Compiler:
 
         self.discard_if(')')
             
-    def compile_var_dec(self) -> int:
+    def compile_var_dec(self) -> None:
         self.discard_if(KeywordEnum.VAR)
-        return self.compile_var_list(IdentEnum.VAR)
+        self.compile_var_list(IdentEnum.VAR)
         
     def compile_statements(self) -> None:
         self.enter_block('statements')
@@ -313,32 +332,43 @@ class Compiler:
     def compile_do(self) -> None:
         self.discard_if(KeywordEnum.DO)
         self.compile_subroutine_call()
+        self.writer.pop_temp(0)
         self.discard_if(';')
 
     def compile_return(self) -> None:
         self.discard_if(KeywordEnum.RETURN)
         if self.current_is(self.TERM):
             self.compile_expression()
+        else:
+            self.writer.push_const(0)
         self.discard_if(';')
         self.writer.w_return()
 
     def compile_subroutine_call(self, last: Optional[Token] = None) -> None:
         # because we need to look t+2 ahead when doing expression, we might
         # have to pass in the identifier manually
-        routine_name = None
-        class_name = None
-        
-        if last:
-            call = last.token
-        else:
-            call = self.discard_if(TokenEnum.IDENTIFIER).token
+        owner_name = last.token if last else self.discard_if(TokenEnum.IDENTIFIER).token
+        class_name = owner_name
+        args = 0
+
         if self.current_is('.'):
             self.next()
             routine_name = self.discard_if(TokenEnum.IDENTIFIER).token
-            call = '{}.{}'.format(call, routine_name)
+            ref = self.symbol_table.find(owner_name)
+            if ref:
+                class_name = ref.tpe
+                self.push_var(owner_name)
+                args += 1
+        else:
+            routine_name = owner_name
+            class_name = self.class_name
+            self.writer.push_pointer(0)
+            args += 1
+
+        call = '{}.{}'.format(class_name, routine_name)
 
         self.discard_if('(')
-        args = self.compile_expression_list()
+        args += self.compile_expression_list()
         self.discard_if(')')
 
         self.writer.w_call(call, args)
@@ -444,4 +474,6 @@ class Compiler:
                 self.writer.w_neg()
             elif const.enum in [KeywordEnum.FALSE, KeywordEnum.NULL]:
                 self.writer.push_const(0)
+            elif const.enum == KeywordEnum.THIS:
+                self.writer.push_pointer(0)
         
