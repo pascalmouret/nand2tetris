@@ -15,9 +15,20 @@ class Array {
 
     /** Constructs a new Array of the given size. */
     function Array new(int size) {
+		var int addr;
+
+		if (size > 0) {
+			let addr = Memory.alloc(size);
+		} else {
+			do Sys.error(100);
+		}
+
+		return addr;
     }
 
     /** Disposes this array. */
     method void dispose() {
+		do Memory.deAlloc(this);
+		return;
     }
 }
