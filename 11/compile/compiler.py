@@ -248,17 +248,19 @@ class Compiler:
         
         if self.current_is('['):
             is_array = True
-            self.push_var(name)
             self.discard_if('[')
             self.compile_expression()
             self.discard_if(']')
-            self.writer.w_add()
-            self.writer.pop_pointer(1)
+            self.writer.pop_temp(0)
             
         self.discard_if('=')
         self.compile_expression()
 
         if is_array:
+            self.push_var(name)
+            self.writer.push_temp(0)
+            self.writer.w_add()
+            self.writer.pop_pointer(1)
             self.writer.pop_that(0)
         else:
             self.pop_var(name)
