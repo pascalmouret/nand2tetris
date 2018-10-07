@@ -1,4 +1,5 @@
 from typing import Iterator, Type, List, Union, Set, Optional
+
 from pathlib import Path
 from textwrap import indent
 from enum import Enum
@@ -23,8 +24,8 @@ class Compiler:
     STATEMENTS = {KeywordEnum.LET, KeywordEnum.IF, KeywordEnum.WHILE, KeywordEnum.DO, KeywordEnum.RETURN}
     TERM_OPEN = set('(')
     UNARY_OP = set('-~')
-    OP = set('+-*/&|<>=--')
-    ALL_OPS = OP | UNARY_OP
+    BINARY_OP = set('+-*/&|<>=')
+    ALL_OPS = BINARY_OP | UNARY_OP
     EXPR_CONST = {KeywordEnum.TRUE, KeywordEnum.FALSE, KeywordEnum.NULL, KeywordEnum.THIS, TokenEnum.INT_CONST, TokenEnum.STRING_CONST}
     TERM = {TokenEnum.IDENTIFIER} | UNARY_OP | TERM_OPEN | EXPR_CONST
     SUB_CALL = set('(.')
@@ -35,6 +36,7 @@ class Compiler:
     def write_to(self, outf: Path) -> None:
         self.class_name = None
         self.symbol_table = SymbolTable()
+        self.label_count = 0
         self.writer = VMWriter(outf)
         self.outf = open(outf, 'w')
         self.depth = 0
@@ -133,14 +135,18 @@ class Compiler:
         else:
             self.writer.push_local(symbol.index)
 
-    def write_op(self, operation: str) -> None:
-        if operation not in self.ALL_OPS:
-            raise CompilerError(self.current.line, '\'{}\' is not a valid operator.')
-        
-        if operation == '+':
-            self.writer.w_add()
-        elif operation == '*':
-            self.writer.w_call('Math.multiply', 2)
+    def pop_var(self, name: str) -> None:
+        symbol = self.get_in_scope(name)
+        if symbol.kind == IdentEnum.FIELD:
+            self.writer.pop_this(symbol.index)
+        elif symbol.kind == IdentEnum.ARG:
+            self.writer.pop_arg(symbol.index)
+        else:
+            self.writer.pop_local(symbol.index)
+
+    def get_label_id(self) -> int:
+        self.label_count += 1
+        return self.label_count
 
     def compile_class(self) -> None:
         self.discard_if(KeywordEnum.CLASS)
@@ -170,16 +176,20 @@ class Compiler:
         self.compile_var_list(var_kind)
         self.exit_block('classVarDec')
 
-    def compile_var_list(self, var_kind: IdentEnum) -> Token:
+    def compile_var_list(self, var_kind: IdentEnum) -> int:
         tpe = self.compile_type()
 
-        name = self.write_if(TokenEnum.IDENTIFIER).token
-        self.write(self.symbol_table.register(name, tpe, var_kind).to_xml(True))
+        name = self.discard_if(TokenEnum.IDENTIFIER).token
+        self.symbol_table.register(name, tpe, var_kind)
+        count = 1
         while not self.current_is(';'):
-            self.write_if(',')
-            name = self.write_if(TokenEnum.IDENTIFIER).token
-            self.write(self.symbol_table.register(name, tpe, var_kind).to_xml(True))
-        self.write_if(';')
+            self.next()
+            name = self.discard_if(TokenEnum.IDENTIFIER).token
+            self.symbol_table.register(name, tpe, var_kind)
+            count += 1
+            
+        self.discard_if(';')
+        return count
 
     def compile_subroutine_dec(self) -> None:
         self.symbol_table.reset_function_scope()
@@ -187,48 +197,38 @@ class Compiler:
         sub_kind = self.discard_if(self.SUBROUTINE_DEC)
         ret_kind = self.compile_type(True)
         sub_name = self.discard_if(TokenEnum.IDENTIFIER).token
-        param_count = self.compile_parameter_list()
-        
+        self.compile_parameter_list()
+        self.discard_if('{')
+
+        local_count = 0
+        while not self.current_is({'}'} | self.STATEMENTS):
+            local_count += self.compile_var_dec()
+
         if sub_kind.enum == KeywordEnum.FUNCTION:
             self.writer.w_function(
                 '{}.{}'.format(self.class_name, sub_name), 
-                param_count
+                local_count
             )
         
-        self.compile_subroutine_body()
+        self.compile_statements()
+        self.discard_if('}')
 
-    def compile_parameter_list(self) -> int:
+    def compile_parameter_list(self) -> None:
         self.discard_if('(')
-        arg_count = 0
         
         while not self.current_is(')'):
-            arg_count += 1
             if self.current_is(','):
-                self.write_if(',')
+                self.next()
             tpe = self.compile_type()
             name = self.discard_if(TokenEnum.IDENTIFIER).token
             self.symbol_table.register(name, tpe, IdentEnum.ARG)
-            
+
         self.discard_if(')')
-        return arg_count
-
-    def compile_subroutine_body(self) -> None:
-        self.discard_if('{')
+            
+    def compile_var_dec(self) -> int:
+        self.discard_if(KeywordEnum.VAR)
+        return self.compile_var_list(IdentEnum.VAR)
         
-        while not self.current_is({'}'} | self.STATEMENTS):
-            self.compile_var_dec()
-        self.compile_statements()
-        
-        self.discard_if('}')
-
-    def compile_var_dec(self) -> None:
-        self.enter_block('varDec')
-        
-        self.write_if(KeywordEnum.VAR)
-        self.compile_var_list(IdentEnum.VAR)
-        
-        self.exit_block('varDec')
-
     def compile_statements(self) -> None:
         self.enter_block('statements')
         
@@ -256,52 +256,59 @@ class Compiler:
             )
             
     def compile_let(self) -> None:
-        self.enter_block('letStatement')
+        self.discard_if(KeywordEnum.LET)
+        name = self.discard_if(TokenEnum.IDENTIFIER).token
         
-        self.write_if(KeywordEnum.LET)
-        name = self.write_if(TokenEnum.IDENTIFIER).token
-        self.write(self.get_in_scope(name).to_xml())
         if self.current_is('['):
             self.write_if('[')
             self.compile_expression()
             self.write_if(']')
-        self.write_if('=')
+            
+        self.discard_if('=')
         self.compile_expression()
-        self.write_if(';')
-
-        self.exit_block('letStatement')
+        self.pop_var(name)
+        self.discard_if(';')
 
     def compile_if(self) -> None:
-        self.enter_block('ifStatement')
+        label_id = self.get_label_id()
 
-        self.write_if(KeywordEnum.IF)
-        self.write_if('(')
+        self.discard_if(KeywordEnum.IF)
+        
         self.compile_expression()
-        self.write_if(')')
-        self.write_if('{')
+        self.writer.w_not()
+        self.writer.w_if('_ELSE_{}'.format(label_id))
+
+        self.discard_if('{')
         self.compile_statements()
-        self.write_if('}')
+        self.discard_if('}')
+
+        self.writer.w_goto('_ENDIF_{}'.format(label_id))
+        self.writer.w_label('_ELSE_{}'.format(label_id))
 
         if self.current_is(KeywordEnum.ELSE):
-            self.write_if(KeywordEnum.ELSE)
-            self.write_if('{')
+            self.next()
+            self.discard_if('{')
             self.compile_statements()
-            self.write_if('}')
+            self.discard_if('}')
 
-        self.exit_block('ifStatement')
-
+        self.writer.w_label('_ENDIF_{}'.format(label_id))
+            
     def compile_while(self) -> None:
-        self.enter_block('whileStatement')
-        
-        self.write_if(KeywordEnum.WHILE)
-        self.write_if('(')
-        self.compile_expression()
-        self.write_if(')')
-        self.write_if('{')
-        self.compile_statements()
-        self.write_if('}')
+        label_id = self.get_label_id()
+    
+        self.discard_if(KeywordEnum.WHILE)
 
-        self.exit_block('whileStatement')
+        self.writer.w_label('_WHILE_{}'.format(label_id))
+        self.compile_expression()
+        self.writer.w_not()
+        self.writer.w_if('_WHILE_END_{}'.format(label_id))
+        
+        self.discard_if('{')
+        self.compile_statements()
+        self.discard_if('}')
+
+        self.writer.w_goto('_WHILE_{}'.format(label_id))
+        self.writer.w_label('_WHILE_END_{}'.format(label_id))
 
     def compile_do(self) -> None:
         self.discard_if(KeywordEnum.DO)
@@ -351,20 +358,22 @@ class Compiler:
 
     def compile_expression(self) -> None:
         self.compile_term()
-        while self.current_is(self.OP):
+        while self.current_is(self.BINARY_OP):
             op = self.current
             self.next()
             self.compile_term()
-            self.write_op(op.token)
+            self.compile_op(op.token)
 
     def compile_term(self) -> None:
         if self.current_is('('):
-            self.write_if('(')
+            self.next()
             self.compile_expression()
-            self.write_if(')')
+            self.discard_if(')')
         elif self.current_is(self.UNARY_OP):
-            self.write_if(self.UNARY_OP)
+            op = self.current
+            self.next()
             self.compile_term()
+            self.compile_unary_op(op.token)
         elif self.current_is(TokenEnum.IDENTIFIER):
             last = self.current
             self.next()
@@ -377,8 +386,7 @@ class Compiler:
                 self.compile_expression()
                 self.write_if(']')
             else:
-                self.write(last.to_xml())
-                self.write(self.get_in_scope(last.token).to_xml())
+                self.push_var(last.token)
         elif self.current_is(self.EXPR_CONST):
             self.compile_const()
         else:
@@ -387,9 +395,53 @@ class Compiler:
                 'Expected expression term, got {}.'.format(self.current)
             )
 
+    def compile_op(self, operation: str) -> None:
+        if operation not in self.BINARY_OP:
+            raise CompilerError(
+                self.current.line, 
+                '\'{}\' is not a valid binary operator.'.format(operation)
+            )
+        
+        if operation == '+':
+            self.writer.w_add()
+        elif operation == '-':
+            self.writer.w_sub()
+        elif operation == '*':
+            self.writer.w_call('Math.multiply', 2)
+        elif operation == '/':
+            self.writer.w_call('Math.divide', 2)
+        elif operation == '&':
+            self.writer.w_and()
+        elif operation == '|':
+            self.writer.w_or()
+        elif operation == '<':
+            self.writer.w_lt()
+        elif operation == '>':
+            self.writer.w_gt()
+        else:
+            self.writer.w_eq()
+
+    def compile_unary_op(self, operation: str) -> None:
+        if operation not in self.UNARY_OP:
+            raise CompilerError(
+                self.current.line, 
+                '\'{}\' is not a valid unary operator.'.format(operation)
+            )
+
+        if operation == '-':
+            self.writer.w_neg()
+        else:
+            self.writer.w_not()
+
     def compile_const(self) -> None:
         const = self.discard_if(self.EXPR_CONST)
         
         if const.kind == TokenEnum.INT_CONST:
             self.writer.push_const(const.token)
+        elif const.kind == TokenEnum.KEYWORD:
+            if const.enum == KeywordEnum.TRUE:
+                self.writer.push_const(1)
+                self.writer.w_neg()
+            elif const.enum in [KeywordEnum.FALSE, KeywordEnum.NULL]:
+                self.writer.push_const(0)
         

@@ -75,7 +75,7 @@ class VMWriter:
         self._write('lt')
 
     def w_and(self) -> None:
-        self._write('gt')
+        self._write('and')
 
     def w_or(self) -> None:
         self._write('or')
@@ -90,7 +90,7 @@ class VMWriter:
         self._write('goto ' + label)
 
     def w_if(self, label: str) -> None:
-        self._write('goto-if ' + label)
+        self._write('if-goto ' + label)
 
     def w_call(self, name: str, args: int) -> None:
         self._write('call {} {}'.format(name, args))

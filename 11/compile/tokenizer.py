@@ -76,11 +76,9 @@ class Tokenizer:
                     self.load_next()
                 return None
             if self.next == '*':
-                for c in self.char_iter:
+                last = self.current
+                while not (last == '*' and self.current == '/'):
                     last = self.current
-                    self.current = self.next
-                    self.next = c
-                    if last == '*' and self.current == '/':
-                        self.load_next()
-                        return None
+                    self.load_next()
+                self.load_next()
         return None
