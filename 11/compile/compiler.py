@@ -302,7 +302,8 @@ class Compiler:
         self.writer.w_if('_WHILE_END_{}'.format(label_id))
         
         self.discard_if('{')
-        self.compile_statements()
+        if not self.current_is('}'):
+            self.compile_statements()
         self.discard_if('}')
 
         self.writer.w_goto('_WHILE_{}'.format(label_id))
