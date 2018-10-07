@@ -249,13 +249,9 @@ class Compiler:
         self.compile_var_list(IdentEnum.VAR)
         
     def compile_statements(self) -> None:
-        self.enter_block('statements')
-        
         self.compile_statement()
         while self.current_is(self.STATEMENTS):
             self.compile_statement()
-
-        self.exit_block('statements')
 
     def compile_statement(self) -> None:
         if self.current_is(KeywordEnum.LET):
@@ -277,15 +273,25 @@ class Compiler:
     def compile_let(self) -> None:
         self.discard_if(KeywordEnum.LET)
         name = self.discard_if(TokenEnum.IDENTIFIER).token
+        is_array = False
         
         if self.current_is('['):
-            self.write_if('[')
+            is_array = True
+            self.push_var(name)
+            self.discard_if('[')
             self.compile_expression()
-            self.write_if(']')
+            self.discard_if(']')
+            self.writer.w_add()
+            self.writer.pop_pointer(1)
             
         self.discard_if('=')
         self.compile_expression()
-        self.pop_var(name)
+
+        if is_array:
+            self.writer.pop_that(0)
+        else:
+            self.pop_var(name)
+        
         self.discard_if(';')
 
     def compile_if(self) -> None:
@@ -410,11 +416,13 @@ class Compiler:
             if self.current_is(self.SUB_CALL):
                 self.compile_subroutine_call(last)
             elif self.current_is('['):
-                self.write(last.to_xml())
-                self.write(self.get_in_scope(last.token).to_xml())
-                self.write_if('[')
+                self.push_var(last.token)
+                self.discard_if('[')
                 self.compile_expression()
-                self.write_if(']')
+                self.discard_if(']')
+                self.writer.w_add()
+                self.writer.pop_pointer(1)
+                self.writer.push_that(0)
             else:
                 self.push_var(last.token)
         elif self.current_is(self.EXPR_CONST):
@@ -468,6 +476,12 @@ class Compiler:
         
         if const.kind == TokenEnum.INT_CONST:
             self.writer.push_const(const.token)
+        elif const.kind == TokenEnum.STRING_CONST:
+            self.writer.push_const(len(const.token))
+            self.writer.w_call('String.new', 1)
+            for c in const.token:
+                self.writer.push_const(ord(c))
+                self.writer.w_call('String.appendChar', 2)
         elif const.kind == TokenEnum.KEYWORD:
             if const.enum == KeywordEnum.TRUE:
                 self.writer.push_const(1)
