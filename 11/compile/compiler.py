@@ -38,11 +38,11 @@ class Compiler:
         self.symbol_table = SymbolTable()
         self.label_count = 0
 
-        self.writer = VMWriter(outf)
-        self.outf = open(outf, 'w')
-        self.depth = 0
         self.tokens = iter(self.tokenizer)
         self.next() # pre-load first token
+
+        self.writer = VMWriter(outf)
+        self.outf = open(outf, 'w')
         self.compile_file()
         self.outf.close()
 
@@ -54,22 +54,6 @@ class Compiler:
             self.current = next(self.tokens)
         except StopIteration:
             raise CompilerError(self.current.line, 'Unexpected EOF.')
-
-    def enter_block(self, name: str) -> None:
-        self.write('<{}>'.format(name))
-        self.depth += 1
-
-    def exit_block(self, name: str) -> None:
-        self.depth -=1
-        if self.depth < 0:
-            raise CompilerError(self.current.line, 'Closed unopened block.')
-        self.write('</{}>'.format(name))
-
-    def write(self, line: Union[str, Token]) -> None:
-        if isinstance(line, Token):
-            line = line.to_xml()
-            self.next()
-        self.outf.write(indent(line, ''.join(['  ' for i in range(0, self.depth)])) + '\n')
 
     def current_is(self, options: Union[
         TokenEnum, KeywordEnum, str, 
@@ -91,19 +75,6 @@ class Compiler:
         if self.current_is(options):
             token = self.current
             self.next()
-            return token
-        else:
-            if not isinstance(options, set):
-                options = {options}
-            self.raise_unexpected([o.name if isinstance(o, Enum) else o for o in options])
-
-    def write_if(self, options: Union[
-        TokenEnum, KeywordEnum, str, 
-        Set[Union[TokenEnum, KeywordEnum, str]]
-    ]) -> Token:
-        if self.current_is(options):
-            token = self.current
-            self.write(self.current)
             return token
         else:
             if not isinstance(options, set):

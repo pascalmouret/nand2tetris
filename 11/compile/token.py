@@ -13,12 +13,6 @@ class Token:
     def __repr__(self) -> str:
         return '{}({})'.format(self.__class__.__name__, self.token)
 
-    def to_xml(self) -> str:
-        return '<{0}> {1} </{0}>'.format(
-            self.__class__.__name__[0].lower() + self.__class__.__name__[1:],
-            self.token
-        )
-
 class Symbol(Token):
     def __init__(self, token: str, line: int) -> None:
         super().__init__(token, line, TokenEnum.SYMBOL)

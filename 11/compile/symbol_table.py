@@ -10,10 +10,6 @@ class Symbol:
         self.index = index
         self.tpe = tpe
 
-    def to_xml(self, declared: bool = False) -> str:
-        return '<identDesc kind="{}" type="{}" index="{}" declared="{}" />'.format(
-            self.kind, self.tpe, self.index, declared
-        )
 
 class SymbolTable:
     _CLASS_LEVEL = {IdentEnum.STATIC, IdentEnum.FIELD}
