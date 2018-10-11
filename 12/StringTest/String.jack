@@ -1,0 +1,158 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/String.jack
+
+/**
+ * Represents character strings. In addition for constructing and disposing
+ * strings, the class features methods for getting and setting individual
+ * characters of the string, for erasing the string's last character,
+ * for appending a character to the string's end, and more typical
+ * string-oriented operations.
+ */
+class String {
+    field int len, maxLen;
+    field Array repr;
+
+    /** constructs a new empty string with a maximum length of maxLength
+     *  and initial length of 0. */
+    constructor String new(int maxLength) {
+        if (maxLength = 0) {
+            let repr = Array.new(1);
+        } else {
+            let repr = Array.new(maxLength);
+        }
+        let maxLen = maxLength;
+        let len = 0;
+        return this;
+    }
+
+    /** Disposes this string. */
+    method void dispose() {
+        do repr.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    /** Returns the current length of this string. */
+    method int length() {
+        return len;
+    }
+
+    /** Returns the character at the j-th location of this string. */
+    method char charAt(int j) {
+        if (j < len) {
+            return repr[j];
+        } else {
+            return 0;
+        }
+    }
+
+    /** Sets the character at the j-th location of this string to c. */
+    method void setCharAt(int j, char c) {
+        if (j < len) {
+            let repr[j] = c;
+        } else {
+            while (len < (j - 1)) {
+                do appendChar(32);
+            }
+            do appendChar(c);
+        }
+        return;
+    }
+
+    /** Appends c to this string's end and returns this string. */
+    method String appendChar(char c) {
+        if (len < maxLen) {
+            let repr[len] = c;
+            let len = len + 1;
+            return this;
+        } else {
+            do System.error(701);
+        }
+    }
+
+    /** Erases the last character from this string. */
+    method void eraseLastChar() {
+        if (len > 0) {
+            let len = len - 1;
+        }
+    }
+
+    /** Returns the integer value of this string, 
+     *  until a non-digit character is detected. */
+    method int intValue() {
+        var int result, current, sign, i;
+        
+        if (len = 0) {
+            return 0;
+        }
+        
+        let result = 0;
+        let sign = 1;
+
+        let i = 0;
+        if (repr[0] = String.minus()) {
+            let sign = -1;
+            let i = i + 1;
+        }
+        
+        while (i < (len + 1)) {
+            let current = repr[i];
+            let i = i + 1;
+            if ((current < 58) & (current > 47)) {
+                let result = result * 10 + (current - 48);
+            } else {
+                return result * sign;
+            }
+        }
+
+        return result * sign;
+    }
+
+    /** Sets this string to hold a representation of the given value. */
+    method void setInt(int val) {
+        var int div, current;
+
+        let len = 0;
+
+        if (val < 0) {
+            do appendChar(String.minus());
+            let val = -val;
+        }
+
+        let div = 10000; // 15bit number can have at most 5 places
+        while ((val / div) = 0) {
+            let div = div / 10;
+        }
+
+        while (val > 0) {
+            let current = val / div;
+            do appendChar(current + 48);
+            let val = val - (current * div);
+            let div = div / 10;
+        }
+
+        return;
+    }
+
+    /** Returns the new line character. */
+    function char newLine() {
+        return 128;
+    }
+
+    /** Returns the backspace character. */
+    function char backSpace() {
+        return 129; 
+    }
+
+    /** Returns the double quote (") character. */
+    function char doubleQuote() {
+        return 34;
+    }
+
+    /** Returns the minus chracter. */
+    function char minus() {
+        return 45;
+    }
+}

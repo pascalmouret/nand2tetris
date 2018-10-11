@@ -20,7 +20,7 @@ class Array {
 		if (size > 0) {
 			let addr = Memory.alloc(size);
 		} else {
-			do Sys.error(100);
+			do Sys.error(101);
 		}
 
 		return addr;
