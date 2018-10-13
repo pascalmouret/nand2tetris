@@ -61,6 +61,10 @@ class Memory {
         let newBlock = Memory.alloc(2);
         let newBlock[0] = o - 1;
         let newBlock[1] = o[-1] + 1;
+        
+        let freeTail[2] = newBlock;
+        let freeTail = newBlock;
+        
         return;
     }    
 }
