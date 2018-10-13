@@ -20,7 +20,7 @@ class Math {
         var int index;
         var Array result;
 
-        let result = Array.new(16);
+        let result = Array.new(15);
         let result[0] = 1;
 
         let index = 1;
@@ -160,5 +160,13 @@ class Math {
         } else {
             return b;
         }
+    }
+
+    function boolean isOdd(int a) {
+        return (a & bitMasks[0]) > 0;
+    }
+
+    function boolean isEven(int a) {
+        return -Math.isOdd(a);
     }
 }
